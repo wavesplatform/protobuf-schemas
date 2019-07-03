@@ -1,12 +1,12 @@
 inThisBuild(Seq(
   organization := "com.wavesplatform",
-  name := "waves-proto",
   version := "1.0.0-SNAPSHOT",
   isSnapshot := version.value.endsWith("SNAPSHOT")
 ))
 
-lazy val `waves-proto` = (project in file("."))
+lazy val `node-proto` = project
   .settings(
+    name := "waves-node-proto",
     autoScalaLibrary := false, // scalaVersion := "2.13.0"
     crossPaths := false,
     libraryDependencies ++= Seq(
@@ -28,7 +28,7 @@ lazy val publishSettings = Seq(
   publishArtifact in Test := false,
   pomIncludeRepository := { _ ⇒ false },
   licenses := Seq("The MIT License" → url("http://opensource.org/licenses/MIT")),
-  homepage := Some(url("https://github.com/wavesplatform/waves-proto")),
+  homepage := Some(url("https://github.com/wavesplatform/waves-protobuf-schemes")),
   pomExtra :=
     <developers>
       <developer>
