@@ -28,7 +28,7 @@ lazy val publishSettings = Seq(
   publishArtifact in Test := false,
   pomIncludeRepository := { _ ⇒ false },
   licenses := Seq("The MIT License" → url("http://opensource.org/licenses/MIT")),
-  homepage := Some(url("https://github.com/wavesplatform/waves-proto")),
+  homepage := Some(url("https://github.com/wavesplatform/waves-protobuf-schemes")),
   pomExtra :=
     <developers>
       <developer>
