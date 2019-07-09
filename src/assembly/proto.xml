@@ -11,22 +11,24 @@
     <includeBaseDirectory>false</includeBaseDirectory>
     <fileSets>
         <fileSet>
-            <directory>${project.build.directory}</directory>
-            <outputDirectory>/</outputDirectory>
+            <directory>${project.build.outputDirectory}/waves</directory>
+            <outputDirectory>/waves</outputDirectory>
             <includes>
                 <include>**/*.proto</include>
             </includes>
-            <useDefaultExcludes>true</useDefaultExcludes>
+            <excludes>
+                <exclude>**/*.class</exclude>
+            </excludes>
         </fileSet>
     </fileSets>
     <dependencySets>
         <dependencySet>
             <outputDirectory>/</outputDirectory>
             <unpack>true</unpack>
-            <scope>runtime</scope>
+            <scope>compile</scope>
             <includes/>
             <excludes>
-                <exclude>io.grpc:*</exclude>
+                <exclude>*</exclude>
             </excludes>
         </dependencySet>
     </dependencySets>
