@@ -23,6 +23,6 @@ message AssetInfoResponse {
     int64 total_volume = 6;
     ScriptData script = 7;
     int64 sponsorship = 8;
-    waves.SignedTransaction issue_transaction = 11;
+    waves.node.SignedTransaction issue_transaction = 11;
     int64 sponsor_balance = 10;
 }
