@@ -1,9 +1,9 @@
 syntax = "proto3";
-package waves.grpc;
+package waves.node.grpc;
 option java_package = "com.wavesplatform.api.grpc";
 option csharp_namespace = "Waves.Grpc";
 
-import "waves/block.proto";
+import "waves/node/block.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/wrappers.proto";
 
@@ -34,6 +34,6 @@ message BlockRangeRequest {
 }
 
 message BlockWithHeight {
-    waves.Block block = 1;
+    waves.node.Block block = 1;
     uint32 height = 2;
 }

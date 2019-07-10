@@ -1,12 +1,9 @@
 // Transactions
 syntax = "proto3";
-package waves;
+package waves.node;
 option java_package = "com.wavesplatform.protobuf.transaction";
 option csharp_namespace = "Waves";
 
-message Recipient {
-    oneof recipient {
-        bytes address = 1;
-        string alias = 2;
-    };
-};
+message Script {
+    bytes bytes = 1;
+}
