@@ -135,6 +135,7 @@
                 <configuration>
                     <descriptors>
                         <descriptor>src/assembly/proto.xml</descriptor>
+<!--                        <descriptor>src/assembly/default.xml</descriptor>-->
                     </descriptors>
                 </configuration>
                 <executions>
@@ -165,7 +166,7 @@
                     <protocArtifact>com.google.protobuf:protoc:3.7.1:exe:${os.detected.classifier}</protocArtifact>
                     <pluginId>grpc-java</pluginId>
                     <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.20.0:exe:${os.detected.classifier}</pluginArtifact>
-                    <protoSourceRoot>${project.basedir}/../node-proto/src/main/resources</protoSourceRoot>
+                    <protoSourceRoot>${project.basedir}/src/main/resources</protoSourceRoot>
                 </configuration>
             </plugin>
         </plugins>

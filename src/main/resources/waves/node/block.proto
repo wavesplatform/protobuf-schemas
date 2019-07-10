@@ -1,10 +1,10 @@
 // Transactions
 syntax = "proto3";
-package waves;
+package waves.node;
 option java_package = "com.wavesplatform.protobuf.block";
 option csharp_namespace = "Waves";
 
-import "waves/transaction.proto";
+import "waves/node/transaction.proto";
 
 message Block {
     message Header {

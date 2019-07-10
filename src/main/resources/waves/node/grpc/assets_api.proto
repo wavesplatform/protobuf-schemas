@@ -1,10 +1,10 @@
 syntax = "proto3";
-package waves.grpc;
+package waves.node.grpc;
 option java_package = "com.wavesplatform.api.grpc";
 option csharp_namespace = "Waves.Grpc";
 
-import "waves/transaction.proto";
-import "waves/grpc/accounts_api.proto";
+import "waves/node/transaction.proto";
+import "waves/node/grpc/accounts_api.proto";
 
 service AssetsApi {
     rpc GetInfo (AssetRequest) returns (AssetInfoResponse);
