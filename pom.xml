@@ -8,10 +8,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <prerequisites>
-        <maven>3.6.1</maven>
-    </prerequisites>
-
     <groupId>com.wavesplatform</groupId>
     <artifactId>waves-node-proto</artifactId>
     <packaging>jar</packaging>
@@ -86,6 +82,9 @@
                     <source>1.6</source>
                     <target>1.6</target>
                     <showWarnings>true</showWarnings>
+                    <compilerArgs>
+                        <arg>-Xlint:-options</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>
