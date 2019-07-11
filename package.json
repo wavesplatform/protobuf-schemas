@@ -10,7 +10,8 @@
     "compileProtoc": "pbjs -t static-module --force-long --no-create --no-verify --no-convert --no-delimited --no-beautify -w commonjs -o dist/index.js \"proto/waves/**/*.proto\""
   },
   "files": [
-    "dist"
+    "dist",
+    "proto"
   ],
   "repository": {
     "type": "git",
