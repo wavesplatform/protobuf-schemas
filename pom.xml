@@ -4,6 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <prerequisites>
         <maven>3.6.1</maven>
     </prerequisites>
@@ -104,19 +108,6 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.9.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
                 <version>1.5</version>
                 <executions>
@@ -135,7 +126,7 @@
                 <configuration>
                     <descriptors>
                         <descriptor>src/assembly/proto.xml</descriptor>
-<!--                        <descriptor>src/assembly/default.xml</descriptor>-->
+                        <!--                        <descriptor>src/assembly/default.xml</descriptor>-->
                     </descriptors>
                 </configuration>
                 <executions>
@@ -179,7 +170,6 @@
             </extension>
         </extensions>
     </build>
-
 
 
     <dependencies>
