@@ -6,6 +6,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <grpc.version>1.20.0</grpc.version>
     </properties>
 
     <groupId>com.wavesplatform</groupId>
@@ -102,11 +103,6 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M3</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
                 <version>1.5</version>
                 <executions>
@@ -125,7 +121,6 @@
                 <configuration>
                     <descriptors>
                         <descriptor>src/assembly/proto.xml</descriptor>
-                        <!--                        <descriptor>src/assembly/default.xml</descriptor>-->
                     </descriptors>
                 </configuration>
                 <executions>
@@ -155,8 +150,9 @@
                 <configuration>
                     <protocArtifact>com.google.protobuf:protoc:3.7.1:exe:${os.detected.classifier}</protocArtifact>
                     <pluginId>grpc-java</pluginId>
-                    <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.20.0:exe:${os.detected.classifier}</pluginArtifact>
-                    <protoSourceRoot>${project.basedir}/src/main/resources</protoSourceRoot>
+                    <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}
+                    </pluginArtifact>
+                    <protoSourceRoot>${project.basedir}/proto</protoSourceRoot>
                 </configuration>
             </plugin>
         </plugins>
@@ -175,17 +171,17 @@
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-netty-shaded</artifactId>
-            <version>1.20.0</version>
+            <version>${grpc.version}</version>
         </dependency>
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-protobuf</artifactId>
-            <version>1.20.0</version>
+            <version>${grpc.version}</version>
         </dependency>
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-stub</artifactId>
-            <version>1.20.0</version>
+            <version>${grpc.version}</version>
         </dependency>
     </dependencies>
 </project>
