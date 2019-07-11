@@ -11,8 +11,8 @@
     <includeBaseDirectory>false</includeBaseDirectory>
     <fileSets>
         <fileSet>
-            <directory>${project.build.outputDirectory}/waves</directory>
-            <outputDirectory>waves</outputDirectory>
+            <directory>${project.basedir}/proto</directory>
+            <outputDirectory>/</outputDirectory>
             <includes>
                 <include>**/*.proto</include>
             </includes>
