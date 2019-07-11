@@ -12,7 +12,7 @@
     <fileSets>
         <fileSet>
             <directory>${project.build.outputDirectory}/waves</directory>
-            <outputDirectory>/waves</outputDirectory>
+            <outputDirectory>waves</outputDirectory>
             <includes>
                 <include>**/*.proto</include>
             </includes>
