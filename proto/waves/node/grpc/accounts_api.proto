@@ -1,10 +1,10 @@
 syntax = "proto3";
 package waves.node.grpc;
 option java_package = "com.wavesplatform.api.grpc";
-option csharp_namespace = "Waves.Grpc";
+option csharp_namespace = "Waves.Node.Grpc";
 
 import "waves/node/grpc/transactions_api.proto";
-import "waves/node/transaction.proto";
+import "waves/transaction.proto";
 
 service AccountsApi {
     rpc GetBalances (BalancesRequest) returns (stream BalanceResponse);
@@ -24,7 +24,7 @@ message DataRequest {
 
 message BalancesRequest {
     bytes address = 1;
-    repeated waves.node.AssetId assets = 4;
+    repeated AssetId assets = 4;
 }
 
 message BalanceResponse {
@@ -40,13 +40,13 @@ message BalanceResponse {
     bytes address = 1; // TODO: ???
     oneof balance {
         WavesBalances waves = 2;
-        waves.node.AssetAmount asset = 3;
+        AssetAmount asset = 3;
     }
 }
 
 message DataEntryResponse {
     bytes address = 1;
-    waves.node.DataTransactionData.DataEntry entry = 2;
+    DataTransactionData.DataEntry entry = 2;
 }
 
 message ScriptData {

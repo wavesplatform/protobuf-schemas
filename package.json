@@ -1,0 +1,30 @@
+{
+  "name": "@waves/protobuf-serialization",
+  "version": "0.0.1",
+  "description": "Generated types and methods for encoding and decoding protobuf messages as well as working with gRPC services.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rm -rf dist && mkdir dist && npm run compileProtoc && npm run createTypeDeclarations && npm run compileProtoc -- --no-comments",
+    "createTypeDeclarations": "pbts -o dist/index.d.ts --no-comments dist/index.js",
+    "compileProtoc": "pbjs -t static-module --force-long --no-create --no-verify --no-convert --no-delimited --no-beautify -w commonjs -o dist/index.js \"proto/waves/**/*.proto\""
+  },
+  "files": [
+    "dist",
+    "proto"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wavesplatform/waves-protobuf-schemes.git"
+  },
+  "author": "Dmitry Shuranov <dvshur@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wavesplatform/waves-protobuf-schemes/issues"
+  },
+  "homepage": "https://github.com/wavesplatform/waves-protobuf-schemes#readme",
+  "dependencies": {
+    "@types/long": "^4.0.0",
+    "protobufjs": "^6.8.8"
+  }
+}
