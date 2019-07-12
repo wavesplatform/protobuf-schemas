@@ -24,6 +24,28 @@ inConfig(Compile)(Seq(
    PB.targets += scalapb.gen(flatPackage = true) -> sourceManaged.value
  ))
 ```
+## JavaScript
+Npm package: `@waves/protobuf-serialization`.
+
+It contains generated JavaScript classes, TypeScript definitions as well as raw proto files. The default build uses CommonJS and includes all of the proto files. We used `pbjs` to build JavaScript and `pbts` to build TypeScript definitions.
+
+You could also make your own custom build from raw `.proto` files, for example, if you want to use only a subset of proto schemas or gRPC services. They can be found in `@waves/protobuf-serialization/proto` directory.
+
+`long.js` is used for 64-bit integers: `int64`, `uint64`, etc.
+
+Example:
+1. `npm install --save @waves/protobuf-serialization`
+2. Default build usage
+```javascript
+import { waves } from '@waves/protobuf-serialization';
+
+const block = new waves.Block();
+block.header = // ... set necessary fields
+
+const buffer = waves.Block.encode(block);
+
+const blockDecoded = waves.Block.decode(buffer);
+```
 
 # How to compile locally
 ## Java
