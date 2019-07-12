@@ -15,14 +15,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wavesplatform/waves-protobuf-schemes.git"
+    "url": "git+https://github.com/wavesplatform/protobuf-schemas.git"
   },
   "author": "Dmitry Shuranov <dvshur@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wavesplatform/waves-protobuf-schemes/issues"
+    "url": "https://github.com/wavesplatform/protobuf-schemas/issues"
   },
-  "homepage": "https://github.com/wavesplatform/waves-protobuf-schemes#readme",
+  "homepage": "https://github.com/wavesplatform/protobuf-schemas#readme",
   "dependencies": {
     "@types/long": "^4.0.0",
     "protobufjs": "^6.8.8"
