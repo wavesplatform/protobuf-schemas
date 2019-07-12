@@ -13,14 +13,16 @@ Add dependency to your `pom.xml`
 ```
 ## ScalaPB
 1. Add dependency to your `build.sbt`: 
-    `libraryDependencies += ("com.wavesplatform" % "protobuf-schemas" % "{version}" classifier "proto") % "protobuf"`
+```scala
+libraryDependencies += ("com.wavesplatform" % "protobuf-schemas" % "{version}" classifier "proto") % "protobuf"
+```
 2. Configure ScalaPB to compile external schemas with:
 ```scala
 inConfig(Compile)(Seq(
    PB.protoSources in Compile := Seq(PB.externalIncludePath.value),
    includeFilter in PB.generate := new SimpleFileFilter((f: File) => f.getName.endsWith(".proto") && f.getParent.endsWith("waves")),
    PB.targets += scalapb.gen(flatPackage = true) -> sourceManaged.value
- ))		 
+ ))
 ```
 
 # How to compile locally
