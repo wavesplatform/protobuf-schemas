@@ -40,6 +40,8 @@ to your `.cspoj` file. After this just build your project.
 or as alternative you can use util protoc, for example:
 ``` protoc --csharp_out=RelativePath  --proto_path=RelativePathToProtoDir RelativePathToProtoFile```
 
+Also there is a NuGet package WavesPlatform.ProtobufSchema with this project.
+
 # How to compile locally
 ## Java
 Use `mvn package` to create JAR artifacts:
