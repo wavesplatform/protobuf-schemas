@@ -47,6 +47,23 @@ const buffer = waves.Block.encode(block);
 const blockDecoded = waves.Block.decode(buffer);
 ```
 
+##CSharp
+1. Add `App.config`, `packages.config` to your c-sharp solution 
+2. Add 
+```
+  <ItemGroup>
+    <Protobuf Include="proto\waves\*.proto" OutputDir="waves\%(RelativePath)" GrpcServices="None" />
+    <Protobuf Include="proto\waves\events\*.proto" OutputDir="waves\events\%(RelativePath)" GrpcServices="None" />
+    <Protobuf Include="proto\waves\node\grpc\*.proto" OutputDir="waves\node\grpc\%(RelativePath)" GrpcServices="Both" />
+  </ItemGroup>
+```
+to your `.csproj` file. After this just build your project.
+
+or as alternative you can use util protoc, for example:
+``` protoc --csharp_out=RelativePath  --proto_path=RelativePathToProtoDir RelativePathToProtoFile```
+
+Also there is a NuGet package WavesPlatform.ProtobufSchema with this project.
+
 # How to compile locally
 ## Java
 Use `mvn package` to create JAR artifacts:
