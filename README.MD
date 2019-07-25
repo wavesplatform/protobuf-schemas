@@ -35,7 +35,7 @@ inConfig(Compile)(Seq(
     <Protobuf Include="proto\waves\node\grpc\*.proto" OutputDir="waves\node\grpc\%(RelativePath)" GrpcServices="Both" />
   </ItemGroup>
 ```
-to your `.cspoj` file. After this just build your project.
+to your `.csproj` file. After this just build your project.
 
 or as alternative you can use util protoc, for example:
 ``` protoc --csharp_out=RelativePath  --proto_path=RelativePathToProtoDir RelativePathToProtoFile```
