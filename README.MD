@@ -47,8 +47,8 @@ const buffer = waves.Block.encode(block);
 const blockDecoded = waves.Block.decode(buffer);
 ```
 
-##CSharp
-1. Add `App.config`, `packages.config` to your c-sharp solution 
+## C#
+1. Add `App.config`, `packages.config` to your C# solution 
 2. Add 
 ```
   <ItemGroup>
