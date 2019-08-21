@@ -1,6 +1,6 @@
 syntax = "proto3";
 package waves;
-option java_package = "com.wavesplatform.api.grpc";
+option java_package = "com.wavesplatform.protobuf";
 option csharp_namespace = "Waves";
 
 message Amount {
