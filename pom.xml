@@ -16,7 +16,7 @@
 
     <name>Waves Node protobuf classes</name>
     <description>Waves Node protobuf java classes</description>
-    <url>https://github.com/wavesplatform/WavesJ</url>
+    <url>https://github.com/wavesplatform/protobuf-schemas</url>
 
     <licenses>
         <license>
