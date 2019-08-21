@@ -4,6 +4,7 @@ option java_package = "com.wavesplatform.api.grpc";
 option csharp_namespace = "Waves.Node.Grpc";
 
 import "waves/node/grpc/transactions_api.proto";
+import "waves/amount.proto";
 import "waves/transaction.proto";
 
 service AccountsApi {
@@ -24,7 +25,7 @@ message DataRequest {
 
 message BalancesRequest {
     bytes address = 1;
-    repeated AssetId assets = 4;
+    repeated bytes assets = 4;
 }
 
 message BalanceResponse {
@@ -37,10 +38,9 @@ message BalanceResponse {
         int64 lease_out = 6;
     }
 
-    bytes address = 1; // TODO: ???
     oneof balance {
-        WavesBalances waves = 2;
-        AssetAmount asset = 3;
+        WavesBalances waves = 1;
+        Amount asset = 2;
     }
 }
 
