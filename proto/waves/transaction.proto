@@ -130,7 +130,6 @@ message ExchangeTransactionData {
     int64 buy_matcher_fee = 3;
     int64 sell_matcher_fee = 4;
     repeated Order orders = 5;
-    int32 taker = 6;
 };
 
 message SponsorFeeTransactionData {
