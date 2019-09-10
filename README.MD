@@ -24,6 +24,10 @@ inConfig(Compile)(Seq(
    PB.targets += scalapb.gen(flatPackage = true) -> sourceManaged.value
  ))
 ```
+3. If you use SNAPSHOT version, add this line
+```scala
+resolvers += Resolver.sonatypeRepo("snapshots")
+```
 ## JavaScript
 Npm package: `@waves/protobuf-serialization`.
 
