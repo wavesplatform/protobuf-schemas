@@ -12,7 +12,7 @@
     <groupId>com.wavesplatform</groupId>
     <artifactId>protobuf-schemas</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <name>Waves Node protobuf classes</name>
     <description>Waves Node protobuf java classes</description>
@@ -154,6 +154,19 @@
                     </pluginArtifact>
                     <protoSourceRoot>${project.basedir}/proto</protoSourceRoot>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                <execution>
+                    <id>attach-javadocs</id>
+                    <goals>
+                        <goal>jar</goal>
+                    </goals>
+                </execution>
+            </executions>
             </plugin>
         </plugins>
 
