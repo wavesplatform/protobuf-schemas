@@ -148,6 +148,17 @@ message InvokeScriptResult {
         Amount amount = 2;
     }
 
+    message Reissue {
+        Amount amount = 1;
+        bool is_reissuable = 2;
+    }
+
+    message Burn {
+        Amount amount = 1;
+    }
+
     repeated DataTransactionData.DataEntry data = 1;
     repeated Payment transfers = 2;
+    repeated Reissue reissues = 4;
+    repeated Burn burns = 5;
 }
