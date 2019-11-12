@@ -148,6 +148,19 @@ message InvokeScriptResult {
         Amount amount = 2;
     }
 
+    message Reissue {
+        bytes asset_id = 1;
+        int64 amount = 2;
+        bool is_reissuable = 3;
+    }
+
+    message Burn {
+        bytes asset_id = 1;
+        int64 amount = 2;
+    }
+
     repeated DataTransactionData.DataEntry data = 1;
     repeated Payment transfers = 2;
+    repeated Reissue reissues = 4;
+    repeated Burn burns = 5;
 }
