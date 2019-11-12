@@ -161,6 +161,7 @@ message InvokeScriptResult {
 
     repeated DataTransactionData.DataEntry data = 1;
     repeated Payment transfers = 2;
+    repeated Transaction issues = 3;
     repeated Reissue reissues = 4;
     repeated Burn burns = 5;
 }
