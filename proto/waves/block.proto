@@ -17,6 +17,7 @@ message Block {
         int32 version = 7;
         bytes generator = 8;
         int64 reward_vote = 9;
+        bytes merkle = 10;
     }
 
     Header header = 1;
