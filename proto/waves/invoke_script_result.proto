@@ -7,9 +7,6 @@ option csharp_namespace = "Waves";
 
 import "waves/transaction.proto";
 import "waves/amount.proto";
-import "waves/script.proto";
-import "waves/recipient.proto";
-import "waves/order.proto";
 
 message InvokeScriptResult {
     message Payment {
