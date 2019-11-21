@@ -1,0 +1,36 @@
+// Transactions
+syntax = "proto3";
+package waves;
+
+option java_package = "com.wavesplatform.protobuf.transaction";
+option csharp_namespace = "Waves";
+
+import "waves/transaction.proto";
+import "waves/amount.proto";
+import "waves/script.proto";
+import "waves/recipient.proto";
+import "waves/order.proto";
+
+message InvokeScriptResult {
+    message Payment {
+        bytes address = 1;
+        Amount amount = 2;
+    }
+
+    message Reissue {
+        bytes asset_id = 1;
+        int64 amount = 2;
+        bool is_reissuable = 3;
+    }
+
+    message Burn {
+        bytes asset_id = 1;
+        int64 amount = 2;
+    }
+
+    repeated DataTransactionData.DataEntry data = 1;
+    repeated Payment transfers = 2;
+    repeated Transaction issues = 3;
+    repeated Reissue reissues = 4;
+    repeated Burn burns = 5;
+}
