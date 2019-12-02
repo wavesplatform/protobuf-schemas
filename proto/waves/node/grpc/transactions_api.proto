@@ -5,6 +5,7 @@ option csharp_namespace = "Waves.Node.Grpc";
 
 import "waves/recipient.proto";
 import "waves/transaction.proto";
+import "waves/invoke_script_result.proto";
 
 service TransactionsApi {
     rpc GetTransactions (TransactionsRequest) returns (stream TransactionResponse);
