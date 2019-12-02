@@ -39,6 +39,7 @@ message Transaction {
         SponsorFeeTransactionData sponsor_fee = 114;
         SetAssetScriptTransactionData set_asset_script = 115;
         InvokeScriptTransactionData invoke_script = 116;
+        UpdateAssetInfoTransactionData update_asset_info = 117;
     };
 };
 
@@ -118,7 +119,6 @@ message IssueTransactionData {
     Script script = 6;
 };
 
-
 message ReissueTransactionData {
     Amount asset_amount = 1;
     bool reissuable = 2;
@@ -149,4 +149,10 @@ message InvokeScriptTransactionData {
     Recipient d_app = 1;
     bytes function_call = 2;
     repeated Amount payments = 3;
+}
+
+message UpdateAssetInfoTransactionData {
+    bytes asset_id = 1;
+    string name = 2;
+    string description = 3;
 }
