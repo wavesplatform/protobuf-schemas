@@ -39,6 +39,7 @@ message Transaction {
         SponsorFeeTransactionData sponsor_fee = 114;
         SetAssetScriptTransactionData set_asset_script = 115;
         InvokeScriptTransactionData invoke_script = 116;
+        UpdateAssetInfoTransactionData update_asset_info = 117;
     };
 };
 
@@ -164,4 +165,10 @@ message InvokeScriptResult {
     repeated Transaction issues = 3;
     repeated Reissue reissues = 4;
     repeated Burn burns = 5;
+}
+
+message UpdateAssetInfoTransactionData {
+    bytes asset_id = 1;
+    string name = 2;
+    string description = 3;
 }
