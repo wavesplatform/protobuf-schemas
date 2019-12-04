@@ -6,11 +6,22 @@ option csharp_namespace = "Waves";
 
 import "waves/transaction.proto";
 import "waves/amount.proto";
+import "waves/script.proto";
 
 message InvokeScriptResult {
     message Payment {
         bytes address = 1;
         Amount amount = 2;
+    }
+
+    message Issue {
+        bytes asset_id = 1;
+        string name = 2;
+        string description = 3;
+        int64 amount = 4;
+        int32 decimals = 5;
+        bool reissuable = 6;
+        Script script = 7;
     }
 
     message Reissue {
@@ -26,7 +37,7 @@ message InvokeScriptResult {
 
     repeated DataTransactionData.DataEntry data = 1;
     repeated Payment transfers = 2;
-    repeated Transaction issues = 3;
+    repeated Issue issues = 3;
     repeated Reissue reissues = 4;
     repeated Burn burns = 5;
 }
