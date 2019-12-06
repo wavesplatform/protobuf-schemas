@@ -22,6 +22,7 @@ message InvokeScriptResult {
         int32 decimals = 5;
         bool reissuable = 6;
         Script script = 7;
+        int64 nonce = 8;
     }
 
     message Reissue {
