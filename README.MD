@@ -19,7 +19,7 @@ libraryDependencies += ("com.wavesplatform" % "protobuf-schemas" % "{version}" c
 2. Configure ScalaPB to compile external schemas with:
 ```scala
 inConfig(Compile)(Seq(
-   PB.protoSources in Compile := Seq(PB.externalIncludePath.value),
+   PB.protoSources in Compile += PB.externalIncludePath.value,
    includeFilter in PB.generate := new SimpleFileFilter((f: File) => f.getName.endsWith(".proto") && f.getParent.endsWith("waves")),
    PB.targets += scalapb.gen(flatPackage = true) -> sourceManaged.value
  ))
