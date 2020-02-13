@@ -68,6 +68,13 @@ or as alternative you can use util protoc, for example:
 
 Also there is a NuGet package WavesPlatform.ProtobufSchema with this project.
 
+## Rust
+Add dependency to your `Cargo.toml`
+```toml
+[dependencies]
+waves-protobuf-schemas = { git = "https://github.com/wavesplatform/protobuf-schemas" }
+```
+
 # How to compile locally
 ## Java
 Use `mvn package` to create JAR artifacts:
