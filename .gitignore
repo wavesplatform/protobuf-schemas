@@ -16,3 +16,8 @@ node_modules/
 dist/
 npm-debug.log
 *.log
+
+
+# Rust
+/target
+Cargo.lock
