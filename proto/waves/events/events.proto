@@ -5,7 +5,6 @@ option java_package = "com.wavesplatform.events.protobuf";
 import "waves/block.proto";
 import "waves/amount.proto";
 import "waves/transaction.proto";
-import "waves/script.proto";
 
 message BlockchainUpdated {
     bytes id = 1;
@@ -62,7 +61,7 @@ message StateUpdate {
         string description = 4;
         bool reissuable = 5;
         int64 volume = 6;
-        Script script = 7;
+        bytes script = 7;
         int64 sponsorship = 8;
         bool nft = 9;
 
