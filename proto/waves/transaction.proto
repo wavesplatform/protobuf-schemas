@@ -5,7 +5,6 @@ option java_package = "com.wavesplatform.protobuf.transaction";
 option csharp_namespace = "Waves";
 
 import "waves/amount.proto";
-import "waves/script.proto";
 import "waves/recipient.proto";
 import "waves/order.proto";
 
@@ -115,7 +114,7 @@ message IssueTransactionData {
     int64 amount = 3;
     int32 decimals = 4;
     bool reissuable = 5;
-    Script script = 6;
+    bytes script = 6;
 };
 
 message ReissueTransactionData {
@@ -125,11 +124,11 @@ message ReissueTransactionData {
 
 message SetAssetScriptTransactionData {
     bytes asset_id = 1;
-    Script script = 2;
+    bytes script = 2;
 };
 
 message SetScriptTransactionData {
-    Script script = 2;
+    bytes script = 1;
 };
 
 message ExchangeTransactionData {

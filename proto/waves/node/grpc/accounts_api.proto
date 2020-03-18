@@ -4,7 +4,6 @@ option java_package = "com.wavesplatform.api.grpc";
 option csharp_namespace = "Waves.Node.Grpc";
 
 import "waves/node/grpc/transactions_api.proto";
-import "waves/script.proto";
 import "waves/amount.proto";
 import "waves/transaction.proto";
 import "google/protobuf/wrappers.proto";
@@ -53,7 +52,7 @@ message DataEntryResponse {
 }
 
 message ScriptData {
-    waves.Script script = 1;
+    bytes script_bytes = 1;
     string script_text = 2;
     int64 complexity = 3;
 }
