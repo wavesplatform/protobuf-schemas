@@ -35,10 +35,15 @@ message InvokeScriptResult {
         int64 amount = 2;
     }
 
+    message ErrorMessage {
+        int32 code = 1;
+        string text = 2;
+    }
+
     repeated DataTransactionData.DataEntry data = 1;
     repeated Payment transfers = 2;
     repeated Issue issues = 3;
     repeated Reissue reissues = 4;
     repeated Burn burns = 5;
-    string error = 6;
+    ErrorMessage error_message = 7;
 }
