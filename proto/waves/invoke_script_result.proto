@@ -45,5 +45,5 @@ message InvokeScriptResult {
     repeated Issue issues = 3;
     repeated Reissue reissues = 4;
     repeated Burn burns = 5;
-    ErrorMessage error_message = 7;
+    ErrorMessage error_message = 6;
 }
