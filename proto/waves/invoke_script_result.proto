@@ -40,5 +40,4 @@ message InvokeScriptResult {
     repeated Issue issues = 3;
     repeated Reissue reissues = 4;
     repeated Burn burns = 5;
-    int32 chain_id = 6;
 }
