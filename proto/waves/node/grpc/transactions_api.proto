@@ -33,14 +33,14 @@ message TransactionStatus {
     bytes id = 1;
     Status status = 2;
     int64 height = 3;
-    ApplicationStatus applicationStatus = 4;
+    ApplicationStatus application_status = 4;
 }
 
 message TransactionResponse {
     bytes id = 1;
     int64 height = 2;
     SignedTransaction transaction = 3;
-    ApplicationStatus applicationStatus = 4;
+    ApplicationStatus application_status = 4;
 }
 
 message TransactionsRequest {
