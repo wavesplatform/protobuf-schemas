@@ -86,7 +86,7 @@ message DataTransactionData {
 
 message MassTransferTransactionData {
     message Transfer {
-        Recipient address = 1;
+        Recipient recipient = 1;
         int64 amount = 2;
     };
 

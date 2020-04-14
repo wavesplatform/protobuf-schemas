@@ -9,7 +9,7 @@ import "waves/invoke_script_result.proto";
 
 service TransactionsApi {
     rpc GetTransactions (TransactionsRequest) returns (stream TransactionResponse);
-    rpc GetStateChanges (TransactionsRequest) returns (stream InvokeScriptResult);
+    rpc GetStateChanges (TransactionsRequest) returns (stream InvokeScriptResultResponse);
     rpc GetStatuses (TransactionsByIdRequest) returns (stream TransactionStatus);
     rpc GetUnconfirmed (TransactionsRequest) returns (stream TransactionResponse);
 
@@ -53,4 +53,9 @@ message CalculateFeeResponse {
 message SignRequest {
     Transaction transaction = 1;
     bytes signer_public_key = 2;
+}
+
+message InvokeScriptResultResponse {
+    SignedTransaction transaction = 1;
+    InvokeScriptResult result = 2;
 }
