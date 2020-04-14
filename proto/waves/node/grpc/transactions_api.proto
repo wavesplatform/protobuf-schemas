@@ -19,7 +19,7 @@ service TransactionsApi {
 
 enum ApplicationStatus {
     UNKNOWN = 0;
-    SUCCEED = 1;
+    SUCCEEDED = 1;
     SCRIPT_EXECUTION_FAILED = 2;
 }
 
