@@ -13,12 +13,7 @@ elif [[ $git_string =~ $version_regex ]]; then
   major_version="${BASH_REMATCH[1]}"
   minor_version="${BASH_REMATCH[2]}"
   patch_version="${BASH_REMATCH[3]}"
-  commits_ahead="${BASH_REMATCH[4]}"
-  if [[ $commits_ahead != 0 ]]; then
-    version_string=$major_version.$minor_version.$((patch_version + 1))-SNAPSHOT
-  else
-    version_string=$major_version.$minor_version.$patch_version
-  fi
+  version_string=$major_version.$minor_version.$((patch_version + 1))-SNAPSHOT
 else
   echo "Error: git describe did not output a valid version string. Unable to update version" >&2
   exit 1
