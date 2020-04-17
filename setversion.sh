@@ -23,13 +23,16 @@ elif [[ $git_string =~ $version_regex ]]; then
     minor_version=0
     patch_version=0
     shift
+  elif [[ $1 == "patch" || $1 == "bugfix" || $1 == "fix" ]]; then
+    patch_version=$((patch_version + 1))
+    shift
   elif [[ $1 == "reset" ]]; then
     postfix=""
   else
     patch_version=$((patch_version + 1))
   fi
 
-   if [[ $1 == "release" ]]; then
+  if [[ $1 == "release" ]]; then
     postfix=""
     shift
   fi
