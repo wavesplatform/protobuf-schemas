@@ -8,7 +8,6 @@ if [[ $commit_message =~ $version_msg_regex ]]; then
   major_version="${BASH_REMATCH[1]}"
   minor_version="${BASH_REMATCH[2]}"
   patch_version="${BASH_REMATCH[3]}"
-  commits_ahead="${BASH_REMATCH[4]}"
   version_string=$major_version.$minor_version.$patch_version
 elif [[ $git_string =~ $version_regex ]]; then
   major_version="${BASH_REMATCH[1]}"
