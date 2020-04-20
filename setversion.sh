@@ -12,6 +12,7 @@ elif [[ $git_string =~ $version_regex ]]; then
   major_version="${BASH_REMATCH[1]}"
   minor_version="${BASH_REMATCH[2]}"
   patch_version="${BASH_REMATCH[3]}"
+  commits="${BASH_REMATCH[4]}"
   postfix="-SNAPSHOT"
 
   if [[ $1 == "minor" ]]; then
@@ -26,7 +27,7 @@ elif [[ $git_string =~ $version_regex ]]; then
   elif [[ $1 == "patch" || $1 == "bugfix" || $1 == "fix" ]]; then
     patch_version=$((patch_version + 1))
     shift
-  elif [[ $1 == "reset" ]]; then
+  elif [[ $1 == "reset" || $commits -eq 0 ]]; then
     postfix=""
   else
     patch_version=$((patch_version + 1))
