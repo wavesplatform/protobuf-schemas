@@ -159,5 +159,4 @@ message UpdateAssetInfoTransactionData {
 
 message ContinuationTransactionData {
     bytes invoke_transaction_id = 1;
-    bytes expr = 2;
 }
