@@ -18,19 +18,27 @@ jobs:
       - name: Set version
         id: version
         run: |
+          shopt -s nocasematch
           if [[ "${{github.event_name}}" == "pull_request" ]]; then
             ref="${{github.head_ref}}"
-            branch_regex="node-([0-9]+)-.*"
+            node_regex="node-([0-9]+)-.*"
+            sc_regex="sc-([0-9]+)-.*"
 
-            if [[ $ref =~ $branch_regex ]]; then
+            if [[ $ref =~ $node_regex ]]; then
               issue="${BASH_REMATCH[1]}"
-              git fetch --prune --unshallow
-              git checkout "$ref"
-              ./setversion.sh "N$issue"
+              prefix="N"
+            elif [[ $ref =~ $sc_regex ]]; then
+              issue="${BASH_REMATCH[1]}"
+              prefix="SC"
             else
               echo "$ref doesnt match node-1111-smth regex"
               exit 1
             fi
+            git fetch --prune --unshallow
+            git checkout "$ref"
+            version="$prefix$issue"
+            if test -z "$version"; then exit 1; fi
+            ./setversion.sh "$version"
           else
             git fetch --prune --unshallow
             git checkout master
