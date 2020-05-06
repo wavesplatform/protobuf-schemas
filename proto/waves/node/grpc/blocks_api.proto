@@ -28,7 +28,8 @@ message BlockRangeRequest {
     uint32 from_height = 1;
     uint32 to_height = 2;
     oneof filter {
-        bytes generator = 3;
+        bytes generator_public_key = 3;
+        bytes generator_address = 4;
     }
 
     bool include_transactions = 100;
