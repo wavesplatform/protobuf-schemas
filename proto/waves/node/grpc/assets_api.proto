@@ -18,7 +18,8 @@ message AssetRequest {
 
 message NFTRequest {
     bytes address = 1;
-    bytes after_asset_id = 2;
+    int32 limit = 2;
+    bytes after_asset_id = 3;
 }
 
 message AssetInfoResponse {
