@@ -8,7 +8,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <grpc.version>1.25.0</grpc.version>
         <protoc.version>3.11.0</protoc.version>
-        <maven.javadoc.skip>true</maven.javadoc.skip>
     </properties>
 
     <groupId>com.wavesplatform</groupId>
