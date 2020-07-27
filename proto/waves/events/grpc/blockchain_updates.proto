@@ -1,0 +1,27 @@
+syntax = "proto3";
+package waves.events.grpc;
+option java_package = "com.wavesplatform.events.grpc.protobuf";
+option csharp_namespace = "Waves.Events.Grpc";
+
+import "waves/events/events.proto";
+
+service BlockchainUpdatesApi {
+    rpc GetForHeight (GetForHeightRequest) returns (GetForHeightResponse);
+    rpc Subscribe (SubscribeRequest) returns (stream SubscribeEvent);
+}
+
+message GetForHeightRequest {
+    int32 height = 1;
+}
+
+message GetForHeightResponse {
+    waves.events.BlockchainUpdated update = 1;
+}
+
+message SubscribeRequest {
+  int32 from_height = 1;
+}
+
+message SubscribeEvent {
+    waves.events.BlockchainUpdated update = 1;
+}
