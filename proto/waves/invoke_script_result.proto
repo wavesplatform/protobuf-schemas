@@ -36,6 +36,10 @@ message InvokeScriptResult {
         int64 amount = 2;
     }
 
+    message SponsorFee {
+        Amount min_fee = 1;
+    }
+
     message ErrorMessage {
         int32 code = 1;
         string text = 2;
@@ -47,4 +51,5 @@ message InvokeScriptResult {
     repeated Reissue reissues = 4;
     repeated Burn burns = 5;
     ErrorMessage error_message = 6;
+    repeated SponsorFee sponsor_fees = 7;
 }

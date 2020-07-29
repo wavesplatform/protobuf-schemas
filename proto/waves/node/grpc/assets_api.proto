@@ -9,10 +9,22 @@ import "waves/node/grpc/accounts_api.proto";
 
 service AssetsApi {
     rpc GetInfo (AssetRequest) returns (AssetInfoResponse);
+    rpc GetNFTList (NFTRequest) returns (stream NFTResponse);
 }
 
 message AssetRequest {
     bytes asset_id = 1;
+}
+
+message NFTRequest {
+    bytes address = 1;
+    int32 limit = 2;
+    bytes after_asset_id = 3;
+}
+
+message NFTResponse {
+    bytes asset_id = 1;
+    AssetInfoResponse asset_info = 2;
 }
 
 message AssetInfoResponse {
