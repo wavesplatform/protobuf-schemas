@@ -7,6 +7,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             "proto/waves/node/grpc/blocks_api.proto",
             "proto/waves/node/grpc/transactions_api.proto",
             "proto/waves/events/events.proto",
+            "proto/waves/events/grpc/blockchain_updates.proto",
         ],
         &["proto"],
     )?;
