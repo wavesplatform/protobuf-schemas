@@ -3,6 +3,10 @@ pub mod waves {
 
     pub mod events {
         tonic::include_proto!("waves.events");
+
+        pub mod grpc {
+            tonic::include_proto!("waves.events.grpc");
+        }
     }
 
     pub mod node {
