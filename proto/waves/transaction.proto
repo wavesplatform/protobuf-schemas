@@ -140,7 +140,7 @@ message InvokeScriptTransactionData {
     Recipient d_app = 1;
     bytes function_call = 2;
     repeated Amount payments = 3;
-    int32 extra_fee_per_step = 4;
+    int64 extra_fee_per_step = 4;
 }
 
 message UpdateAssetInfoTransactionData {
