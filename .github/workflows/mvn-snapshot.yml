@@ -15,6 +15,12 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+      - name: Check proto changes
+        id: proto-changes
+        uses: actions/cache@v2
+        with:
+          path: target/**
+          key: proto-${{ hashFiles('proto/**/*.proto') }}
       - name: Set version
         id: version
         run: |
@@ -50,6 +56,7 @@ jobs:
             fi
           fi
       - name: Release Maven package
+        if: steps.proto-changes.outputs.cache-hit != 'true'
         uses: samuelmeuli/action-maven-publish@v1.4.0
         with:
           gpg_private_key: ${{ secrets.gpg_private_key }}
