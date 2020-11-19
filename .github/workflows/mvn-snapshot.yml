@@ -19,7 +19,7 @@ jobs:
         id: proto-changes
         uses: actions/cache@v2
         with:
-          path: target/**
+          path: target
           key: proto-${{ hashFiles('proto/**/*.proto') }}
       - name: Set version
         id: version
