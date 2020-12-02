@@ -45,6 +45,10 @@ message BlockchainUpdated {
         Append append = 11;
         Rollback rollback = 12;
     }
+
+    // todo naming
+    // relevant, mentioned, included, used, ???
+    repeated AssetInfo referenced_assets = 21;
 }
 
 message StateUpdate {
@@ -95,4 +99,10 @@ message StateUpdate {
             */
         bytes safe_volume = 21;
     }
+}
+
+message AssetInfo {
+    bytes id = 1;
+    int32 decimals = 2;
+    string name = 2;
 }
