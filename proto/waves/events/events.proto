@@ -26,7 +26,10 @@ message BlockchainUpdated {
             MicroBlockAppend micro_block = 2;
         }
 
-        repeated bytes transaction_ids = 3;
+        // deprecated
+        repeated bytes transaction_ids = 3; // deprecated
+        // instead use
+        repeated TransactionMetadata transactions_metadata = 4;
 
         StateUpdate state_update = 11;
         repeated StateUpdate transaction_state_updates = 12;
@@ -94,5 +97,24 @@ message StateUpdate {
                 Encoding: like Java BigInteger, https://docs.oracle.com/javase/7/docs/api/java/math/BigInteger.html#toByteArray()
             */
         bytes safe_volume = 21;
+    }
+}
+
+message TransactionMetadata {
+    bytes id = 1;
+
+    oneof metadata {
+        // <TransactionName>Metadata <transaction_name> = 1<TransactionNumber>
+        TransferMetadata transfer = 104;
+        MassTransferMetadata mass_transfer = 111;
+    };
+
+    // message <TransactionName>Metadata { ... }
+    message TransferMetadata {
+        bytes recipient_address = 1;
+    }
+    
+    message MassTransferMetadata {
+        repeated bytes recipients_addresses = 1;
     }
 }
