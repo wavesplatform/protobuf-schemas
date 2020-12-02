@@ -103,6 +103,7 @@ message TransactionMetadata {
         // <TransactionName>Metadata <transaction_name> = 1<TransactionNumber>
         TransferMetadata transfer = 104;
         MassTransferMetadata mass_transfer = 111;
+        InvokeScriptMetadata invoke_script = 116;
     };
 
     // message <TransactionName>Metadata { ... }
@@ -112,5 +113,9 @@ message TransactionMetadata {
     
     message MassTransferMetadata {
         repeated bytes recipients_addresses = 1;
+    }
+
+    message InvokeScriptMetadata {
+        bytes d_app_address = 1;
     }
 }
