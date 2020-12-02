@@ -39,6 +39,14 @@ message BlockchainUpdated {
         }
 
         RollbackType type = 1;
+
+        // todo decide
+        repeated bytes removed_transaction_ids = 2;
+        // or
+        repeated Block removed_blocks = 2;
+        // or maybe both?
+
+        StateUpdate rollback_state_update = 3;
     }
 
     oneof update {
@@ -49,24 +57,56 @@ message BlockchainUpdated {
 
 message StateUpdate {
     repeated BalanceUpdate balances = 1;
-    repeated LeasingUpdate leases = 2;
+    repeated LeasingUpdate leasing_for_address = 2;
     repeated DataEntryUpdate data_entries = 3;
     repeated AssetStateUpdate assets = 4;
+    // todo discuss
+    repeated AssetStateUpdate deleted_assets = 5; 
+    repeated LeaseUpdate individual_leases = 6;
 
     message BalanceUpdate {
         bytes address = 1;
-        Amount amount = 2;
+        Amount amount_after = 2;
+        int64 amount_before = 3;
     }
 
     message LeasingUpdate {
         bytes address = 1;
-        int64 in = 2;
-        int64 out = 3;
+        int64 in_after = 2;
+        int64 out_after = 3;
+        int64 in_before = 4;
+        int64 out_before = 5;
+    }
+
+    message LeaseUpdate {
+        enum LeaseStatus {
+            INACTIVE = 0;
+            ACTIVE = 1;
+        }
+     
+        bytes lease_id = 1;
+        LeaseStatus status_after = 2;
+        // LeaseStatus status_before = 3; not needed so far?
+
+        int64 amount = 10;
+        bytes sender = 11;
+        bytes recipient = 12;
+        bytes origin_transaction_id = 13;
     }
 
     message DataEntryUpdate {
         bytes address = 1;
         DataTransactionData.DataEntry data_entry = 2;
+
+        // todo decide
+        oneof value_before {
+            int64 int_value = 10;
+            bool bool_value = 11;
+            bytes binary_value = 12;
+            string string_value = 13;
+        };
+        // OR
+        DataTransactionData.DataEntry data_entry_before = 10;
     }
 
     message AssetStateUpdate {

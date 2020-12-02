@@ -53,51 +53,22 @@ message StateUpdate {
     repeated DataEntryUpdate data_entries = 3;
     repeated AssetStateUpdate assets = 4;
 
-    message Balances {
-        int64 before = 1;
-        int64 after = 2;
-    }
-
-    // todo do we need to discriminate between zero balance state and deleted state?
-    message AssetBalanceUpdate {
+    message BalanceUpdate {
         bytes address = 1;
-        bytes asset_id = 2; // empty for Waves? or use Asset?
-        Balances update = 3;
+        Amount amount = 2;
     }
 
-    message LeasingBalanceUpdate {
+    message LeasingUpdate {
         bytes address = 1;
-        Balances in = 2;
-        Balances out = 3;
-    }
-    
-    message LeaseUpdate {
-        enum LeaseStatus {
-            INACTIVE = 0;
-            ACTIVE = 1;
-        }
-     
-        // const
-        bytes lease_id = 1;
-        bytes origin_transaction_id = 2;
-
-        // variable
-        LeaseStatus status = 3;
-
-        // const
-        bytes sender = 3;
-        bytes recipient = 4;
-        int64 amount = 5;
+        int64 in = 2;
+        int64 out = 3;
     }
 
-    // todo
     message DataEntryUpdate {
         bytes address = 1;
         DataTransactionData.DataEntry data_entry = 2;
-        DataTransactionData.DataEntry data_entry = 2;
     }
 
-    
     message AssetStateUpdate {
         message AssetScriptInfo {
             bytes script = 1;
