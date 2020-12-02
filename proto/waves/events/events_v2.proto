@@ -60,30 +60,17 @@ message StateUpdate {
 
     // todo do we need to discriminate between zero balance state and deleted state?
     message AssetBalanceUpdate {
-        // const
         bytes address = 1;
-        bytes asset_id = 2; // zero for Waves?
-
-        
-
-        // variable
-        int64 before = 3;
-        int64 after = 4;
+        bytes asset_id = 2; // empty for Waves? or use Asset?
+        Balances update = 3;
     }
 
     message LeasingBalanceUpdate {
         bytes address = 1;
-
-        
-
-        // variable
-        int64 in_before = 2;
-        int64 out_before = 3;
-
-        int64 in_after = 2;
-        int64 out_after = 3;
+        Balances in = 2;
+        Balances out = 3;
     }
-     
+    
     message LeaseUpdate {
         enum LeaseStatus {
             INACTIVE = 0;
