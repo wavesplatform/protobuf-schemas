@@ -119,6 +119,7 @@ message TransactionMetadata {
         bytes d_app_address = 1;
         string function_name = 2;
         repeated Argument arguments = 3;
+        repeated Payment payments = 4;
         
         message Argument {
             message List {
@@ -130,6 +131,11 @@ message TransactionMetadata {
                 bytes binary_value = 2;
                 List list = 10;
             }
+        }
+
+        message Payment {
+            bytes asset_id = 1;
+            int64 amount = 2;
         }
     }
 }
