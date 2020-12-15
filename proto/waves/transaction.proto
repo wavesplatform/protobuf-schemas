@@ -151,5 +151,5 @@ message UpdateAssetInfoTransactionData {
 
 message ContinuationTransactionData {
     bytes invoke_script_transaction_id = 1;
-    int32 step = 2;
+    int32 nonce = 2;
 }
