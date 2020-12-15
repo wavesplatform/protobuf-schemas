@@ -10,7 +10,9 @@ import "waves/invoke_script_result.proto";
 
 service TransactionsApi {
     rpc GetTransactions (TransactionsRequest) returns (stream TransactionResponse);
-    rpc GetStateChanges (TransactionsRequest) returns (stream InvokeScriptResultResponse);
+    rpc GetStateChanges (TransactionsRequest) returns (stream InvokeScriptResultResponse) {
+        option deprecated = true;
+    };
     rpc GetStatuses (TransactionsByIdRequest) returns (stream TransactionStatus);
     rpc GetUnconfirmed (TransactionsRequest) returns (stream TransactionResponse);
 
@@ -42,6 +44,7 @@ message TransactionResponse {
     int64 height = 2;
     SignedTransaction transaction = 3;
     ApplicationStatus application_status = 4;
+    InvokeScriptResult invoke_script_result = 5;
 }
 
 message TransactionsRequest {
