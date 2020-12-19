@@ -41,7 +41,7 @@ message InvokeScriptResult {
     }
 
     message Lease {
-        bytes recipient = 1;
+        Recipient recipient = 1;
         int64 amount = 2;
         int64 nonce = 3;
     }
