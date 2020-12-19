@@ -7,6 +7,7 @@ option go_package = "github.com/wavesplatform/gowaves/pkg/grpc/generated/waves";
 
 import "waves/transaction.proto";
 import "waves/amount.proto";
+import "waves/recipient.proto";
 
 message InvokeScriptResult {
     message Payment {
