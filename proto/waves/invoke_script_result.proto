@@ -45,10 +45,11 @@ message InvokeScriptResult {
         Recipient recipient = 1;
         int64 amount = 2;
         int64 nonce = 3;
+        bytes lease_id = 4;
     }
 
     message LeaseCancel {
-        bytes leaseId = 1;
+        bytes lease_id = 1;
     }
 
     message ErrorMessage {
