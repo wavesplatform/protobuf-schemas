@@ -12,7 +12,6 @@ import "google/protobuf/wrappers.proto";
 service AccountsApi {
     rpc GetBalances (BalancesRequest) returns (stream BalanceResponse);
     rpc GetScript (AccountRequest) returns (ScriptData);
-    rpc GetActiveLeasesOld (AccountRequest) returns (stream TransactionResponse);
     rpc GetActiveLeases (AccountRequest) returns (stream LeaseResponse);
     rpc GetDataEntries (DataRequest) returns (stream DataEntryResponse);
     rpc ResolveAlias (google.protobuf.StringValue) returns (google.protobuf.BytesValue);
