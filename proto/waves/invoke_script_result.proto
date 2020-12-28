@@ -50,7 +50,7 @@ message InvokeScriptResult {
         repeated bytes args = 2;
     }
 
-    message Invokation {
+    message Invocation {
         bytes dApp = 1;
         Call call = 2;
         repeated Amount payments = 3;
@@ -64,5 +64,5 @@ message InvokeScriptResult {
     repeated Burn burns = 5;
     ErrorMessage error_message = 6;
     repeated SponsorFee sponsor_fees = 7;
-    repeated Invokation invokes = 8;
+    repeated Invocation invokes = 8;
 }
