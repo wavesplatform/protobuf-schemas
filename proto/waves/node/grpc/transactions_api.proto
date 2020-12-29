@@ -24,6 +24,7 @@ enum ApplicationStatus {
     UNKNOWN = 0;
     SUCCEEDED = 1;
     SCRIPT_EXECUTION_FAILED = 2;
+    SCRIPT_EXECUTION_IN_PROGRESS = 3;
 }
 
 message TransactionStatus {
