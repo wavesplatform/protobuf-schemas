@@ -4,15 +4,15 @@ option java_package = "com.wavesplatform.api.grpc";
 option csharp_namespace = "Waves.Node.Grpc";
 option go_package = "github.com/wavesplatform/gowaves/pkg/grpc/generated/waves/node/grpc";
 
-import "waves/node/grpc/transactions_api.proto";
 import "waves/amount.proto";
 import "waves/transaction.proto";
+import "waves/recipient.proto";
 import "google/protobuf/wrappers.proto";
 
 service AccountsApi {
     rpc GetBalances (BalancesRequest) returns (stream BalanceResponse);
     rpc GetScript (AccountRequest) returns (ScriptData);
-    rpc GetActiveLeases (AccountRequest) returns (stream TransactionResponse);
+    rpc GetActiveLeases (AccountRequest) returns (stream LeaseResponse);
     rpc GetDataEntries (DataRequest) returns (stream DataEntryResponse);
     rpc ResolveAlias (google.protobuf.StringValue) returns (google.protobuf.BytesValue);
 }
@@ -56,4 +56,13 @@ message ScriptData {
     bytes script_bytes = 1;
     string script_text = 2;
     int64 complexity = 3;
+}
+
+message LeaseResponse {
+    bytes leaseId = 1;
+    bytes originTransactionId = 2;
+    bytes sender = 3;
+    Recipient recipient = 4;
+    int64 amount = 5;
+    int64 height = 6;
 }
