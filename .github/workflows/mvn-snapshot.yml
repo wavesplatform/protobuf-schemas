@@ -20,7 +20,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: target
-          key: proto-${{ hashFiles('proto/**/*.proto') }}
+          key: proto-${{ hashFiles('proto/**/*.proto') }}-1.2.x
       - name: Set version
         id: version
         run: |
