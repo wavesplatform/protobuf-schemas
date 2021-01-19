@@ -27,6 +27,7 @@ message BlockchainUpdated {
         }
 
         repeated bytes transaction_ids = 3;
+        repeated TransactionMetadata transactions_metadata = 4;
 
         StateUpdate state_update = 11;
         repeated StateUpdate transaction_state_updates = 12;
@@ -39,34 +40,59 @@ message BlockchainUpdated {
         }
 
         RollbackType type = 1;
+        repeated bytes removed_transaction_ids = 2;
+        repeated Block removed_blocks = 3;
+        StateUpdate rollback_state_update = 4;
     }
 
     oneof update {
         Append append = 11;
         Rollback rollback = 12;
     }
+
+    repeated StateUpdate.AssetInfo referenced_assets = 21;
 }
 
 message StateUpdate {
     repeated BalanceUpdate balances = 1;
-    repeated LeasingUpdate leases = 2;
+    repeated LeasingUpdate leasing_for_address = 2;
     repeated DataEntryUpdate data_entries = 3;
     repeated AssetStateUpdate assets = 4;
+    repeated AssetStateUpdate deleted_assets = 5;
+    repeated LeaseUpdate individual_leases = 6;
 
     message BalanceUpdate {
         bytes address = 1;
-        Amount amount = 2;
+        Amount amount_after = 2;
+        int64 amount_before = 3;
     }
 
     message LeasingUpdate {
         bytes address = 1;
-        int64 in = 2;
-        int64 out = 3;
+        int64 in_after = 2;
+        int64 out_after = 3;
+        int64 in_before = 4;
+        int64 out_before = 5;
+    }
+
+    message LeaseUpdate {
+        enum LeaseStatus {
+            INACTIVE = 0;
+            ACTIVE = 1;
+        }
+
+        bytes lease_id = 1;
+        LeaseStatus status_after = 2;
+        int64 amount = 10;
+        bytes sender = 11;
+        bytes recipient = 12;
+        bytes origin_transaction_id = 13;
     }
 
     message DataEntryUpdate {
         bytes address = 1;
         DataTransactionData.DataEntry data_entry = 2;
+        DataTransactionData.DataEntry data_entry_before = 10;
     }
 
     message AssetStateUpdate {
@@ -94,5 +120,111 @@ message StateUpdate {
                 Encoding: like Java BigInteger, https://docs.oracle.com/javase/7/docs/api/java/math/BigInteger.html#toByteArray()
             */
         bytes safe_volume = 21;
+    }
+
+    message AssetInfo {
+        bytes id = 1;
+        int32 decimals = 2;
+        string name = 3;
+    }
+}
+
+message TransactionMetadata {
+    oneof metadata {
+        // <TransactionName>Metadata <transaction_name> = 1<TransactionNumber>
+        TransferMetadata transfer = 104;
+        MassTransferMetadata mass_transfer = 111;
+        InvokeScriptMetadata invoke_script = 116;
+        LeaseMetadata lease_meta = 117;
+    };
+
+    // message <TransactionName>Metadata { ... }
+    message TransferMetadata {
+        bytes recipient_address = 1;
+    }
+
+    message MassTransferMetadata {
+        repeated bytes recipients_addresses = 1;
+    }
+
+    message InvokeScriptMetadata {
+        bytes d_app_address = 1;
+        string function_name = 2;
+        repeated Argument arguments = 3;
+        repeated Payment payments = 4;
+        repeated StateChanges state_changes = 5;
+
+        message Argument {
+            message List {
+                repeated Argument items = 1;
+            }
+
+            oneof value {
+                int64 integer_value = 1;
+                bytes binary_value = 2;
+                string string_value = 3;
+                bool boolean_value = 4;
+                List list = 10;
+            }
+        }
+
+        message Payment {
+            bytes asset_id = 1;
+            int64 amount = 2;
+        }
+
+        message StateChanges {
+            message List {
+                repeated StateChanges items = 1;
+            }
+
+            oneof value {
+                DataStateChanges data = 1;
+                TransfersStateChanges transfers = 2;
+                SponsorFeeStateChanges sponsor_fee = 3;
+                IssuesStateChanges issues = 4;
+                ReissuesStateChanges reissues = 5;
+                BurnsStateChanges burns = 6;
+            }
+
+            message DataStateChanges {
+                DataTransactionData.DataEntry data_entry = 1;
+            }
+
+            message TransfersStateChanges {
+                bytes address = 1;
+                Amount amount_after = 2;
+            }
+
+            message SponsorFeeStateChanges {
+                bytes asset_id = 1;
+                int64 min_sponsored_asset_fee = 2;
+            }
+
+            message IssuesStateChanges {
+                bytes asset_id = 1;
+                string name = 2;
+                string description = 3;
+                int64 quantity = 4;
+                int64 decimals = 5;
+                bool isReissuable = 6;
+                bytes compiledScript = 7;
+            }
+
+            message ReissuesStateChanges {
+                bytes asset_id = 1;
+                int64 quantity = 2;
+                bool isReissuable = 3;
+            }
+
+            message BurnsStateChanges {
+                bytes asset_id = 1;
+                int64 quantity = 2;
+            }
+        }
+    }
+
+    message LeaseMetadata {
+        bytes recipient_address = 1;
     }
 }
