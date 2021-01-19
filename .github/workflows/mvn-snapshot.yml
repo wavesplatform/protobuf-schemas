@@ -2,9 +2,9 @@ name: Maven snapshot
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, version-1.2.x ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, version-1.2.x ]
 
 jobs:
   build:
