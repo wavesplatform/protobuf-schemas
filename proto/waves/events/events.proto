@@ -106,14 +106,16 @@ message StateUpdate {
         }
 
         bytes asset_id = 1;
-        int32 decimals = 2;
-        string name = 3;
-        string description = 4;
-        bool reissuable = 5;
-        int64 volume = 6;
-        AssetScriptInfo script_info = 7;
-        int64 sponsorship = 8;
-        bool nft = 9;
+        bytes issuer = 2;
+        int32 decimals = 3;
+        string name = 4;
+        string description = 5;
+        bool reissuable = 6;
+        int64 volume = 7;
+        AssetScriptInfo script_info = 8;
+        int64 sponsorship = 9;
+        bool nft = 10;
+        int32 last_updated = 11;
 
         /*
                 Related to a past behavior in the blockchain when it was possible to reissue
