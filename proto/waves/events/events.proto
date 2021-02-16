@@ -5,6 +5,7 @@ option java_package = "com.wavesplatform.events.protobuf";
 import "waves/block.proto";
 import "waves/amount.proto";
 import "waves/transaction.proto";
+import "waves/invoke_script_result.proto";
 
 message BlockchainUpdated {
     bytes id = 1;
@@ -156,8 +157,8 @@ message TransactionMetadata {
         bytes d_app_address = 1;
         string function_name = 2;
         repeated Argument arguments = 3;
-        repeated Payment payments = 4;
-        repeated StateChanges state_changes = 5;
+        repeated Amount payments = 4;
+        InvokeScriptResult result = 5;
 
         message Argument {
             message List {
@@ -170,61 +171,6 @@ message TransactionMetadata {
                 string string_value = 3;
                 bool boolean_value = 4;
                 List list = 10;
-            }
-        }
-
-        message Payment {
-            bytes asset_id = 1;
-            int64 amount = 2;
-        }
-
-        message StateChanges {
-            message List {
-                repeated StateChanges items = 1;
-            }
-
-            oneof value {
-                DataStateChanges data = 1;
-                TransfersStateChanges transfers = 2;
-                SponsorFeeStateChanges sponsor_fee = 3;
-                IssuesStateChanges issues = 4;
-                ReissuesStateChanges reissues = 5;
-                BurnsStateChanges burns = 6;
-            }
-
-            message DataStateChanges {
-                DataTransactionData.DataEntry data_entry = 1;
-            }
-
-            message TransfersStateChanges {
-                bytes address = 1;
-                Amount amount_after = 2;
-            }
-
-            message SponsorFeeStateChanges {
-                bytes asset_id = 1;
-                int64 min_sponsored_asset_fee = 2;
-            }
-
-            message IssuesStateChanges {
-                bytes asset_id = 1;
-                string name = 2;
-                string description = 3;
-                int64 quantity = 4;
-                int64 decimals = 5;
-                bool isReissuable = 6;
-                bytes compiledScript = 7;
-            }
-
-            message ReissuesStateChanges {
-                bytes asset_id = 1;
-                int64 quantity = 2;
-                bool isReissuable = 3;
-            }
-
-            message BurnsStateChanges {
-                bytes asset_id = 1;
-                int64 quantity = 2;
             }
         }
     }
