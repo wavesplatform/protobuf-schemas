@@ -152,14 +152,16 @@ message TransactionMetadata {
 
     message MassTransferMetadata {
         repeated bytes recipients_addresses = 1;
+        repeated string recipients_aliases = 2;
     }
 
     message InvokeScriptMetadata {
         bytes d_app_address = 1;
-        string function_name = 2;
-        repeated Argument arguments = 3;
-        repeated Amount payments = 4;
-        InvokeScriptResult result = 5;
+        string d_app_alias = 2;
+        string function_name = 3;
+        repeated Argument arguments = 4;
+        repeated Amount payments = 5;
+        InvokeScriptResult result = 6;
 
         message Argument {
             message List {
@@ -178,5 +180,6 @@ message TransactionMetadata {
 
     message LeaseMetadata {
         bytes recipient_address = 1;
+        string recipient_alias = 2;
     }
 }
