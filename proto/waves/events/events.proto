@@ -147,7 +147,6 @@ message TransactionMetadata {
     // message <TransactionName>Metadata { ... }
     message TransferMetadata {
         bytes recipient_address = 1;
-        string recipient_alias = 2;
     }
 
     message MassTransferMetadata {
