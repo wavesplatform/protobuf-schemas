@@ -1,6 +1,7 @@
 syntax = "proto3";
 package waves.events;
 option java_package = "com.wavesplatform.events.protobuf";
+option go_package = "github.com/wavesplatform/gowaves/pkg/grpc/generated/waves/events";
 
 import "waves/block.proto";
 import "waves/amount.proto";

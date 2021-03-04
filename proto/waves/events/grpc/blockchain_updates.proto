@@ -2,6 +2,7 @@ syntax = "proto3";
 package waves.events.grpc;
 option java_package = "com.wavesplatform.events.api.grpc.protobuf";
 option csharp_namespace = "Waves.Events.Grpc";
+option go_package = "github.com/wavesplatform/gowaves/pkg/grpc/generated/waves/events/grpc";
 
 import "waves/events/events.proto";
 
