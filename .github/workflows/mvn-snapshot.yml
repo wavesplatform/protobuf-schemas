@@ -41,11 +41,11 @@ jobs:
             ./setversion.sh "$version"
           else
             git fetch --prune --unshallow
-            git checkout master
+            git checkout "${{ github.ref }}"
             mvn_version=$(grep -Eo '<version>(.*)</version>' pom.xml | head -1)
             version=$(./setversion.sh snapshot)
             if [[ $mvn_version != "<version>$version</version>" ]]; then
-              echo "Incorrect version set: $mvn_version"
+              echo "Incorrect version set: $mvn_version, should be $version"
               exit 1
             fi
           fi
