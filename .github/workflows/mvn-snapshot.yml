@@ -2,7 +2,7 @@ name: Maven snapshot
 
 on:
   push:
-    branches: [ master, version-1.2.x ]
+    branches: [ master, version-1.2.x, action-test ]
   pull_request:
     branches: [ master, version-1.2.x ]
 
@@ -15,6 +15,9 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+      - name: git describe
+        run: |
+          git describe --tags --first-parent
       - name: Set version
         id: version
         run: |
