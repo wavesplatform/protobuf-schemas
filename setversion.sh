@@ -1,7 +1,7 @@
 #!/bin/bash
 version_regex='v([0-9]+)\.([0-9]+)\.?([0-9]*)-([0-9]+)-g([0-9|a-z]+)'
 version_msg_regex='([0-9]+)\.([0-9]+)\.?([0-9]*)'
-git_string=$(git describe --tags --long)
+git_string=$(git describe --tags --long --first-parent)
 
 if [[ $1 =~ $version_msg_regex ]]; then
   major_version="${BASH_REMATCH[1]}"

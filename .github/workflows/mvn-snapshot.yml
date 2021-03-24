@@ -18,6 +18,7 @@ jobs:
       - name: Set version
         id: version
         run: |
+          git fetch --prune --unshallow
           shopt -s nocasematch
           if [[ "${{github.event_name}}" == "pull_request" ]]; then
             ref="${{github.head_ref}}"
@@ -34,14 +35,10 @@ jobs:
               echo "$ref doesnt match node-1111-smth regex"
               exit 1
             fi
-            git fetch --prune --unshallow
-            git checkout "$ref"
             version="$prefix$issue"
             if test -z "$version"; then exit 1; fi
             ./setversion.sh "$version"
           else
-            git fetch --prune --unshallow
-            git checkout "${{ github.ref }}"
             mvn_version=$(grep -Eo '<version>(.*)</version>' pom.xml | head -1)
             version=$(./setversion.sh snapshot)
             if [[ $mvn_version != "<version>$version</version>" ]]; then
