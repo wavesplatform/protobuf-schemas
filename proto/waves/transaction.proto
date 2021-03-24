@@ -39,7 +39,6 @@ message Transaction {
         SetAssetScriptTransactionData set_asset_script = 115;
         InvokeScriptTransactionData invoke_script = 116;
         UpdateAssetInfoTransactionData update_asset_info = 117;
-        ContinuationTransactionData continuation = 118;
     };
 };
 
@@ -140,16 +139,10 @@ message InvokeScriptTransactionData {
     Recipient d_app = 1;
     bytes function_call = 2;
     repeated Amount payments = 3;
-    int64 extra_fee_per_step = 4;
 }
 
 message UpdateAssetInfoTransactionData {
     bytes asset_id = 1;
     string name = 2;
     string description = 3;
-}
-
-message ContinuationTransactionData {
-    bytes invoke_script_transaction_id = 1;
-    int32 nonce = 2;
 }
