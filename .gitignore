@@ -21,3 +21,6 @@ npm-debug.log
 # Rust
 /target
 Cargo.lock
+
+# Python
+.venv

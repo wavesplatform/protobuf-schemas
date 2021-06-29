@@ -45,7 +45,6 @@ else
   exit 1
 fi
 
-mvn_ver_regex="<version>([0-9]+)\.([0-9]+)\.?([0-9]*)(-SNAPSHOT)?<\/version>"
 orig_ver_regex="([0-9]+)\.([0-9]+)\.?([0-9]*)(-SNAPSHOT)?"
 if [ "$(uname)" == "Darwin" ]; then
   SED="gsed -i -E -e" # brew install gnu-sed
@@ -53,7 +52,7 @@ else
   SED="sed -i -E -e"
 fi
 
-$SED "0,/$mvn_ver_regex/s//<version>$version_string<\/version>/" pom.xml
+mvn versions:set -DnewVersion=$version_string -DgenerateBackupPoms=false
 $SED "0,/$orig_ver_regex/s//$version_string/" Cargo.toml
 $SED "0,/$orig_ver_regex/s//$version_string/" package.json
 $SED "0,/$orig_ver_regex/s//$version_string/" package-lock.json
