@@ -10,7 +10,10 @@ import "waves/recipient.proto";
 import "waves/order.proto";
 
 message SignedTransaction {
-    Transaction transaction = 1;
+    oneof transaction {
+        Transaction waves_transaction = 1;
+        bytes ethereum_transaction = 3;
+    }
     repeated bytes proofs = 2;
 }
 
