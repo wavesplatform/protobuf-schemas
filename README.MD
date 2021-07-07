@@ -14,7 +14,7 @@ Add dependency to your `pom.xml`
 ## ScalaPB
 1. Add dependency to your `build.sbt`: 
 ```scala
-libraryDependencies += ("com.wavesplatform" % "protobuf-schemas" % "{version}" classifier "proto") % "protobuf"
+libraryDependencies += "com.wavesplatform" % "protobuf-schemas" % "{version}" % "protobuf-src" intransitive()
 ```
 2. Configure ScalaPB to compile external schemas with:
 ```scala
@@ -28,6 +28,7 @@ inConfig(Compile)(Seq(
 ```scala
 resolvers += Resolver.sonatypeRepo("snapshots")
 ```
+See [ScalaPB docs](https://scalapb.github.io/docs/third-party-protos) for more info.
 ## JavaScript
 Npm package: `@waves/protobuf-serialization`.
 
@@ -75,8 +76,19 @@ Add dependency to your `Cargo.toml`
 waves-protobuf-schemas = { git = "https://github.com/wavesplatform/protobuf-schemas" }
 ```
 
-# How to compile locally
+# How to generate sources locally
+
 ## Java
 Use `mvn package` to create JAR artifacts:
-1. `protobuf-schemas-{version}-proto.jar` - raw .proto files
+1. `protobuf-schemas-{version}-protobuf-src.jar` - raw .proto files
 2. `protobuf-schemas-{version}.jar` - protoc-generated Java classes
+
+## Python
+Generating python sources requires python 3 or later. Run the following commands from the root of this repository to generate python sources in `/target/python`:
+```
+python3 -m venv .venv
+. .venv/bin/activate
+pip install grpcio grpcio-tools
+python -m grpc_tools.protoc --proto_path=./proto  --python_out=./target/python  `find ./proto -type f`
+```
+Tweak `--python_out` parameter to generate files elsewhere. Target path should likely be absolute. 
