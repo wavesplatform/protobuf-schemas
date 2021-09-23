@@ -4,8 +4,8 @@ version = "1.4.0-SNAPSHOT"
 edition = "2018"
 
 [dependencies]
-tonic = "0.4"
-prost = "0.7"
+tonic = "0.5"
+prost = "0.8"
 
 [build-dependencies]
-tonic-build = "0.4"
+tonic-build = "0.5"
