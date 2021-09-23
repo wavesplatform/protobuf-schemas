@@ -39,6 +39,7 @@ message Transaction {
         SetAssetScriptTransactionData set_asset_script = 115;
         InvokeScriptTransactionData invoke_script = 116;
         UpdateAssetInfoTransactionData update_asset_info = 117;
+        InvokeExpressionTransactionData invoke_expression = 118;
     };
 };
 
@@ -145,4 +146,8 @@ message UpdateAssetInfoTransactionData {
     bytes asset_id = 1;
     string name = 2;
     string description = 3;
+}
+
+message InvokeExpressionTransactionData {
+    bytes expression = 1;
 }
