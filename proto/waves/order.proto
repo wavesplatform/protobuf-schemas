@@ -29,4 +29,5 @@ message Order {
     Amount matcher_fee = 10;
     int32 version = 11;
     repeated bytes proofs = 12;
+    bytes eip712_signature = 13;
 };
