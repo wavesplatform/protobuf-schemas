@@ -27,6 +27,7 @@ jobs:
             pattern="s/(.+)-SNAPSHOT/\1-"$pr_number"-SNAPSHOT/g"
             mvn_version=$(echo $mvn_version | sed -E $pattern)
             mvn versions:set -DnewVersion=$mvn_version -DgenerateBackupPoms=false -q -DforceStdout
+            echo Setting version to $mvn_version
           fi
 
           echo ::set-output name=mvn_version::$mvn_version
