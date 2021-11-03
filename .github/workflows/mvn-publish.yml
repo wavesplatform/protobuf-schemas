@@ -1,12 +1,16 @@
-name: Publish snapshot to OSSRH
+name: Publish packages to OSSRH
 
 on:
-  pull_request:
   push:
-      branches: [ master, version-* ]
+    branches:
+      - master
+      - version-[0-9].[0-9]+.x
+    tags:
+      - v[0-9].[0-9]+.[0-9]+
+  pull_request:
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -17,22 +21,29 @@ jobs:
         with:
           key: ${{ hashFiles('pom.xml') }}
           path: ~/.m2/repository
-      - id: version
-        name: Update version for PR builds
+      - name: Prepare version
+        id: maven-version
         run: |
           mvn_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          git_ref=${GITHUB_REF##*/}
           pr_number=${{ github.event.number }}
-          if [[ $pr_number != "" ]]
-          then
+          if [[ $git_ref =~ v[0-9]+\.[0-9]+\.[0-9]+$ ]] ; then
+            if [[ v$mvn_version != $git_ref ]] ; then
+              echo Maven version $mvn_version does not match tag $git_ref
+              exit 1
+            fi
+          elif [[ $pr_number != "" && $mvn_version =~ -SNAPSHOT$ ]] ; then
             pattern="s/(.+)-SNAPSHOT/\1-"$pr_number"-SNAPSHOT/g"
             mvn_version=$(echo $mvn_version | sed -E $pattern)
             mvn versions:set -DnewVersion=$mvn_version -DgenerateBackupPoms=false -q -DforceStdout
+            echo Setting version to $mvn_version
+          elif [[ ! $mvn_version =~ -SNAPSHOT$ ]] ; then
+            echo Refusing to publish non-snapshot version $mvn_version
+            echo '::set-output name=skip-publish::true'
           fi
-
-          echo ::set-output name=mvn_version::$mvn_version
-      - name: Publish snapshot
-        if: ${{ endsWith(steps.version.outputs.mvn_version, 'SNAPSHOT') }}
-        uses: samuelmeuli/action-maven-publish@v1.4.0
+      - uses: samuelmeuli/action-maven-publish@v1.4.0
+        if:
+          ${{ steps.maven-version.outputs.skip-publish != 'true' }}
         with:
           gpg_private_key: ${{ secrets.OSSRH_GPG_KEY_ASCII }}
           gpg_passphrase: ${{ secrets.OSSRH_GPG_PASSPHRASE }}
