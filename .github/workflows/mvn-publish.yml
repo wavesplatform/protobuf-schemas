@@ -2,10 +2,10 @@ name: Publish packages to OSSRH
 
 on:
   push:
-    branches: 
+    branches:
       - master
       - version-[0-9].[0-9]+.x
-    tags: 
+    tags:
       - v[0-9].[0-9]+.[0-9]+
   pull_request:
 
@@ -36,6 +36,7 @@ jobs:
             pattern="s/(.+)-SNAPSHOT/\1-"$pr_number"-SNAPSHOT/g"
             mvn_version=$(echo $mvn_version | sed -E $pattern)
             mvn versions:set -DnewVersion=$mvn_version -DgenerateBackupPoms=false -q -DforceStdout
+            echo Setting version to $mvn_version
           elif [[ ! $mvn_version =~ -SNAPSHOT$ ]] ; then
             echo Refusing to publish non-snapshot version $mvn_version
             echo '::set-output name=skip-publish::true'
