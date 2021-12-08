@@ -18,8 +18,8 @@ message Order {
     };
 
     enum PriceMode {
-        ASSET_DECIMALS = 0;
-        FIXED_DECIMALS = 1;
+        FIXED_DECIMALS = 0;
+        ASSET_DECIMALS = 1;
     };
 
     int32 chain_id = 1;
