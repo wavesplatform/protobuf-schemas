@@ -7,7 +7,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <grpc.version>1.25.0</grpc.version>
-        <protoc.version>3.11.0</protoc.version>
+        <protoc.version>3.16.1</protoc.version>
     </properties>
 
     <groupId>com.wavesplatform</groupId>
