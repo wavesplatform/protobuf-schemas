@@ -68,6 +68,7 @@ message InvokeScriptResult {
                 bytes binary_value = 2;
                 string string_value = 3;
                 bool boolean_value = 4;
+                bytes case_obj = 5;
                 List list = 10;
             }
         }
