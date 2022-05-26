@@ -29,17 +29,22 @@ inConfig(Compile)(Seq(
 resolvers += Resolver.sonatypeRepo("snapshots")
 ```
 See [ScalaPB docs](https://scalapb.github.io/docs/third-party-protos) for more info.
-## JavaScript
+## TypeScript / JavaScript
+
 Npm package: `@waves/protobuf-serialization`.
 
-It contains generated JavaScript classes, TypeScript definitions as well as raw proto files. The default build uses CommonJS and includes all of the proto files. We used `pbjs` to build JavaScript and `pbts` to build TypeScript definitions.
+It contains generated JavaScript classes, TypeScript definitions as well as raw proto files. 
+We use:
+* `@grpc/proto-loader` to load proto-files and the embedded app `proto-loader-gen-types` to generate definitions;
+* `@grpc/grpc-js` to request the data from Waves Node gRPC API;
+* `long.js` to represent 64-bit integers: `int64`, `uint64`, etc.
 
-You could also make your own custom build from raw `.proto` files, for example, if you want to use only a subset of proto schemas or gRPC services. They can be found in `@waves/protobuf-serialization/proto` directory.
+You could also make your own custom build from raw `.proto` files, for example, if you want to use only a subset of proto schemas or gRPC services. 
+They can be found in `@waves/protobuf-serialization/proto` directory.
 
-`long.js` is used for 64-bit integers: `int64`, `uint64`, etc.
+### Example
 
-Example:
-1. `npm install --save @waves/protobuf-serialization`
+1. `npm install --save @waves/protobuf-serialization bs58`
 2. Default build usage
 ```javascript
 import { waves } from '@waves/protobuf-serialization';

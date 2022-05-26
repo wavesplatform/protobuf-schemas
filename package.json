@@ -1,21 +1,22 @@
 {
-  "name": "@waves/protobuf-serialization",
+  "name": "@wavesplatform/protobuf-serialization",
   "version": "1.4.2",
   "description": "Generated types and methods for encoding and decoding protobuf messages as well as working with gRPC services.",
   "scripts": {
     "build": "npm run clear && npm run protoLoaderGenTypes && npm run mkIndex && tsc",
     "clear": "rm -rf dist && rm -rf types",
     "protoLoaderGenTypes": "shopt -s globstar && proto-loader-gen-types -v --keepCase=false --longs=Long --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js -I=./ -I=proto --outDir=types proto/waves/**/*.proto",
-    "mkIndex": "ts-node ./src/gen.ts"
+    "mkIndex": "ts-node ./src/gen.ts",
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts'"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "build/**/*.ts"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wavesplatform/protobuf-schemas.git"
+  },
+  "publishConfig": {
+    "@wavesplatform:registry": "https://npm.pkg.github.com"
   },
   "author": "Dmitry Shuranov <dvshur@gmail.com>",
   "license": "MIT",
@@ -29,7 +30,10 @@
     "@types/long": "^4.0.2"
   },
   "devDependencies": {
+    "@types/mocha": "^9.1.1",
     "@types/node": "^17.0.35",
+    "bs58": "^5.0.0",
+    "mocha": "^10.0.0",
     "ts-node": "^10.8.0",
     "typescript": "^4.6.4"
   }

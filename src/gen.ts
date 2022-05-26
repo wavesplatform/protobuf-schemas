@@ -76,7 +76,6 @@ function mkTypesFileContent(structDefinitions: Iterable<[string, string, string[
     // We generate namespaces, because this is the only way we can write: let x: api.waves.node.grpc.TransactionResponse
     content += '\nexport namespace api {';
     for (let ns of accNamespaces.keys()) {
-        // console.log(ns);
         const exports = accNamespaces.get(ns) || [];
         const nss = ns.split('.');
         content += '\n' + [...utils.map(nss, x => `export namespace ${x} {`)].join('\n') + exports.join('\n') + '\n}'.repeat(nss.length);
