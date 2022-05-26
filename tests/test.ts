@@ -28,7 +28,7 @@ async function getTransactionHeight(channel: Channel, txnId: string) {
     })
 }
 
-describe('', () => {
+describe('Waves gRPC API', () => {
     let channel = w.grpc.mkDefaultChannel('grpc.wavesnodes.com:6870')
 
     // One request
