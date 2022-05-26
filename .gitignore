@@ -14,9 +14,10 @@ target
 # NodeJS
 node_modules/
 dist/
+types/
 npm-debug.log
 *.log
-
+./index.ts
 
 # Rust
 /target

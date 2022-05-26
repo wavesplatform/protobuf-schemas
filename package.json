@@ -2,15 +2,14 @@
   "name": "@waves/protobuf-serialization",
   "version": "1.4.2",
   "description": "Generated types and methods for encoding and decoding protobuf messages as well as working with gRPC services.",
-  "main": "dist/index.js",
-  "types": "dist/**/*.ts",
   "scripts": {
-    "build": "rm -rf dist && mkdir dist && npm run protoLoaderGenTypes && cp ./src/index.js ./dist",
-    "protoLoaderGenTypes": "shopt -s globstar && proto-loader-gen-types -v --keepCase=false --longs=Long --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js -I=./ -I=proto --outDir=dist proto/waves/**/*.proto"
+    "build": "npm run clear && npm run protoLoaderGenTypes && npm run mkIndex",
+    "clear": "rm -rf types && mkdir -p types",
+    "protoLoaderGenTypes": "shopt -s globstar && proto-loader-gen-types -v --keepCase=false --longs=Long --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js -I=./ -I=proto --outDir=types proto/waves/**/*.proto",
+    "mkIndex": "ts-node ./src/gen.ts"
   },
   "files": [
-    "dist/**/*",
-    "proto/**/*"
+    "build/**/*.ts"
   ],
   "repository": {
     "type": "git",
@@ -26,5 +25,10 @@
     "@grpc/grpc-js": "^1.6.7",
     "@grpc/proto-loader": "^0.6.11",
     "@types/long": "^4.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.35",
+    "ts-node": "^10.8.0",
+    "typescript": "^4.6.4"
   }
 }
