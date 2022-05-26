@@ -17,7 +17,7 @@ dist/
 types/
 npm-debug.log
 *.log
-./index.ts
+/index.ts
 
 # Rust
 /target
