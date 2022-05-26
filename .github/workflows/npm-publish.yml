@@ -1,6 +1,9 @@
 name: Node.js Package
 
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - 'js-api'
 
 jobs:
   build:
