@@ -21,7 +21,7 @@ export function protoFilesInSubDir(dir: string) {
 }
 
 export function wavesProtoFiles() {
-    return [...protoFilesInSubDir(path.resolve(__dirname, './proto'))];
+    return [...protoFilesInSubDir(path.resolve(__dirname, '../proto'))];
 }
 
 // API definitions

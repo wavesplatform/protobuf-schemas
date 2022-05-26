@@ -3,11 +3,13 @@
   "version": "1.4.2",
   "description": "Generated types and methods for encoding and decoding protobuf messages as well as working with gRPC services.",
   "scripts": {
-    "build": "npm run clear && npm run protoLoaderGenTypes && npm run mkIndex",
-    "clear": "rm -rf types && mkdir -p types",
+    "build": "npm run clear && npm run protoLoaderGenTypes && npm run mkIndex && tsc",
+    "clear": "rm -rf dist && rm -rf types",
     "protoLoaderGenTypes": "shopt -s globstar && proto-loader-gen-types -v --keepCase=false --longs=Long --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js -I=./ -I=proto --outDir=types proto/waves/**/*.proto",
     "mkIndex": "ts-node ./src/gen.ts"
   },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "build/**/*.ts"
   ],

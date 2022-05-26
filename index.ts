@@ -1,4 +1,6 @@
 // WARNING: this file is generated, do not modify it!
+// This file have to be here, because otherwise ProtoGrpcType imports point to a wrong location
+
 import Long from "long";
 import * as path from 'path';
 import * as g from '@grpc/grpc-js';
@@ -20,7 +22,7 @@ export function protoFilesInSubDir(dir: string) {
 }
 
 export function wavesProtoFiles() {
-    return [...protoFilesInSubDir(path.resolve(__dirname, './proto'))];
+    return [...protoFilesInSubDir(path.resolve(__dirname, '../proto'))];
 }
 
 // API definitions
