@@ -1,5 +1,5 @@
 import * as assert from 'assert'
-import * as w from '../dist'
+import * as w from '../grpc'
 import b58 from 'bs58'
 import {Channel} from '@grpc/grpc-js';
 

@@ -1,23 +1,27 @@
 {
-  "name": "@wavesplatform/protobuf-schemas",
-  "version": "0.0.1",
+  "name": "@waves/protobuf-serialization",
+  "version": "1.4.2",
   "description": "Generated types and methods for encoding and decoding protobuf messages as well as working with gRPC services.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "npm run clear && npm run protoLoaderGenTypes && npm run mkIndex && tsc",
+    "build": "npm run clear && npm run genPbts && npm run genPrpc",
     "clear": "rm -rf dist && rm -rf types",
+    "genPbts": "mkdir dist && npm run compileProtoc && npm run createTypeDeclarations && npm run compileProtoc -- --no-comments",
+    "createTypeDeclarations": "pbts -o dist/index.d.ts --no-comments dist/index.js",
+    "compileProtoc": "pbjs -t static-module --force-long --no-create --no-verify --no-convert --no-delimited --no-beautify -w commonjs -o dist/index.js \"proto/waves/**/*.proto\"",
+    "genPrpc": "npm run protoLoaderGenTypes && npm run mkIndex && tsc",
     "protoLoaderGenTypes": "shopt -s globstar && proto-loader-gen-types -v --keepCase=false --longs=Long --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js -I=./ -I=proto --outDir=types proto/waves/**/*.proto",
     "mkIndex": "ts-node ./src/gen.ts",
     "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts'"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "proto"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wavesplatform/protobuf-schemas.git"
-  },
-  "publishConfig": {
-    "access": "public",
-    "@wavesplatform:registry": "https://npm.pkg.github.com"
   },
   "author": "Dmitry Shuranov <dvshur@gmail.com>",
   "license": "MIT",
@@ -28,7 +32,8 @@
   "dependencies": {
     "@grpc/grpc-js": "^1.6.7",
     "@grpc/proto-loader": "^0.6.11",
-    "@types/long": "^4.0.2"
+    "protobufjs": "^6.8.8",
+    "@types/long": "^4.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^9.1.1",
