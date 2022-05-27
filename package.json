@@ -1,5 +1,5 @@
 {
-  "name": "@wavesplatform/protobuf-serialization",
+  "name": "@wavesplatform/protobuf-schemas",
   "version": "1.4.2",
   "description": "Generated types and methods for encoding and decoding protobuf messages as well as working with gRPC services.",
   "scripts": {

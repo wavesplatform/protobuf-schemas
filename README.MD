@@ -44,10 +44,10 @@ They can be found in `@waves/protobuf-serialization/proto` directory.
 
 ### Example
 
-1. `npm install --save @waves/protobuf-serialization bs58`
+1. `npm install --save @wavesplatform/protobuf-schemas bs58`
 2. Default build usage
 ```javascript
-import { waves } from '@waves/protobuf-serialization';
+import { waves } from '@wavesplatform/protobuf-schemas';
 
 const block = new waves.Block();
 block.header = // ... set necessary fields
