@@ -14,7 +14,9 @@ jobs:
         with:
           node-version: 14
       - run: npm ci
-      - run: npm run build
+      - run: |
+          /bin/bash # For shopt 
+          npm run build
       - run: npm test
 
   publish-gpr:
