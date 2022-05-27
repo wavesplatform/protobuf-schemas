@@ -16,6 +16,7 @@
     "url": "git+https://github.com/wavesplatform/protobuf-schemas.git"
   },
   "publishConfig": {
+    "access": "public",
     "@wavesplatform:registry": "https://npm.pkg.github.com"
   },
   "author": "Dmitry Shuranov <dvshur@gmail.com>",
