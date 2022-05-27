@@ -32,9 +32,7 @@ jobs:
           node-version: 14
           registry-url: https://npm.pkg.github.com/
       - run: |
-          exec bash # For shopt, see package.json: scripts.protoLoaderGenTypes
           npm ci
-          npm run build
-          npm test
+          npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
