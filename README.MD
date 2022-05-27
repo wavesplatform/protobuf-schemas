@@ -45,17 +45,60 @@ They can be found in `@waves/protobuf-serialization/proto` directory.
 ### Example
 
 1. `npm install --save @wavesplatform/protobuf-schemas bs58`
-2. Default build usage
-```javascript
-import { waves } from '@wavesplatform/protobuf-schemas';
-
-const block = new waves.Block();
-block.header = // ... set necessary fields
-
-const buffer = waves.Block.encode(block);
-
-const blockDecoded = waves.Block.decode(buffer);
-```
+2. Default build usage with TypeScript:
+    ```typescript
+    import * as w from '@waves/protobuf-serialization'
+    import b58 from 'bs58'
+    
+    const channel = w.grpc.mkDefaultChannel('grpc.wavesnodes.com:6870')
+    
+    const transactionsApi = w.api.waves.node.grpc.mkTransactionsApi(channel)
+    const txnId = '287XcMXPDY7pnw2tECbV86TZetPi2x9JBg9BVUsGaSJx';
+    transactionsApi
+        .getTransactions({transactionIds: [b58.decode(txnId)]})
+        .on("data", (item: w.api.waves.node.grpc.TransactionResponse) => console.log(`[getTransactions] The transaction '${txnId}' was on height of ${item.height}`))
+        .on("end", () => console.log("[getTransactions] Stream ended"))
+        .on("error", (e: Error) => console.error("[getTransactions] Failed", e))
+    
+    const accountsApi = w.api.waves.node.grpc.mkAccountsApi(channel)
+    const alias = 'likli'
+    accountsApi.resolveAlias(
+        {value: alias},
+        (error, response) => {
+            if (error === null) {
+                const addressBytes = response?.value || new Buffer(0);
+                console.log(`[resolveAlias] The address of '${alias}' is ${b58.encode(addressBytes)}`)
+            } else console.error(`[resolveAlias] Can't determine address of '${alias}'`, error)
+        }
+    )
+    
+    const blocksApi = w.api.waves.node.grpc.mkBlocksApi(channel)
+    blocksApi.getBlock(
+        {height: 1},
+        (error, response) => {
+            if (error === null) {
+                const signatureBytes = response?.block?.signature || new Buffer(0);
+                console.log(`[getBlock] The signature of block 1 is ${b58.encode(signatureBytes)}`)
+            } else console.error("[getBlock] Can't get a block 1", error)
+        }
+    )
+    ```
+    
+    With JavaScript looks similar:
+    ```javascript
+    const w = require('@waves/protobuf-serialization');
+    const b58 = require('bs58');
+    
+    const channel = w.grpc.mkDefaultChannel('grpc.wavesnodes.com:6870')
+    
+    const transactionsApi = w.api.waves.node.grpc.mkTransactionsApi(channel)
+    const txnId = '287XcMXPDY7pnw2tECbV86TZetPi2x9JBg9BVUsGaSJx';
+    transactionsApi
+        .getTransactions({transactionIds: [b58.decode(txnId)]})
+        .on("data", (item) => console.log(`[getTransactions] The transaction '${txnId}' was on height of ${item.height}`))
+        .on("end", () => console.log("[getTransactions] Stream ended"))
+        .on("error", (e) => console.error("[getTransactions] Failed", e))
+    ```
 
 ## C#
 1. Add `App.config`, `packages.config` to your C# solution 
