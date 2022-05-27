@@ -13,11 +13,13 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 14
-      - run: npm ci
       - run: |
-          exec bash # For shopt 
+          exec bash # For shopt, see package.json: scripts.protoLoaderGenTypes
+          npm ci
           npm run build
-      - run: npm test
+          pwd
+          ls -alh dist
+          npm test
 
   publish-gpr:
     needs: build
