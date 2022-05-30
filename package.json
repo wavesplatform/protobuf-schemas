@@ -5,12 +5,12 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "npm run clear && npm run genPbts && npm run genPrpc",
+    "build": "npm run clear && npm run genPbts && npm run genPlgt",
     "clear": "rm -rf dist && rm -rf types",
     "genPbts": "mkdir dist && npm run compileProtoc && npm run createTypeDeclarations && npm run compileProtoc -- --no-comments",
     "createTypeDeclarations": "pbts -o dist/index.d.ts --no-comments dist/index.js",
     "compileProtoc": "pbjs -t static-module --force-long --no-create --no-verify --no-convert --no-delimited --no-beautify -w commonjs -o dist/index.js \"proto/waves/**/*.proto\"",
-    "genPrpc": "npm run protoLoaderGenTypes && npm run mkIndex && tsc",
+    "genPlgt": "npm run protoLoaderGenTypes && npm run mkIndex && tsc",
     "protoLoaderGenTypes": "shopt -s globstar && proto-loader-gen-types -v --keepCase=false --longs=Long --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js -I=./ -I=proto --outDir=types proto/waves/**/*.proto",
     "mkIndex": "ts-node ./src/gen.ts",
     "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts'"
