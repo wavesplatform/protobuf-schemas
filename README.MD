@@ -12,7 +12,7 @@ Add dependency to your `pom.xml`
 </dependency>
 ```
 ## ScalaPB
-1. Add dependency to your `build.sbt`: 
+1. Add dependency to your `build.sbt`:
 ```scala
 libraryDependencies += "com.wavesplatform" % "protobuf-schemas" % "{version}" % "protobuf-src" intransitive()
 ```
@@ -74,20 +74,22 @@ We use:
     import * as w from '@waves/protobuf-serialization/grpc'
     import b58 from 'bs58'
     
-    const channel = w.grpc.mkDefaultChannel('grpc.wavesnodes.com:6870')
+    const grpcChannel = w.grpc.mkDefaultChannel('grpc.wavesnodes.com:6870')
     
-    const transactionsApi = w.api.waves.node.grpc.mkTransactionsApi(channel)
+    // Node gRPC API - a streaming example
+    const transactionsApi = w.api.waves.node.grpc.mkTransactionsApi(grpcChannel)
     const txnId = '287XcMXPDY7pnw2tECbV86TZetPi2x9JBg9BVUsGaSJx';
     transactionsApi
-        .getTransactions({transactionIds: [b58.decode(txnId)]})
+        .getTransactions({transactionIds: [b58.decode(txnId)]}) // see TransactionsRequest
         .on("data", (item: w.api.waves.node.grpc.TransactionResponse) => console.log(`[getTransactions] The transaction '${txnId}' was on height of ${item.height}`))
         .on("end", () => console.log("[getTransactions] Stream ended"))
         .on("error", (e: Error) => console.error("[getTransactions] Failed", e))
     
-    const accountsApi = w.api.waves.node.grpc.mkAccountsApi(channel)
+    // Node gRPC API - an one-shot example
+    const accountsApi = w.api.waves.node.grpc.mkAccountsApi(grpcChannel)
     const alias = 'likli'
     accountsApi.resolveAlias(
-        {value: alias},
+        {value: alias}, // Accepts google.protobuf.StringValue, that has "value" field
         (error, response) => {
             if (error === null) {
                 const addressBytes = response?.value || new Buffer(0);
@@ -95,15 +97,19 @@ We use:
             } else console.error(`[resolveAlias] Can't determine address of '${alias}'`, error)
         }
     )
-    
-    const blocksApi = w.api.waves.node.grpc.mkBlocksApi(channel)
-    blocksApi.getBlock(
+   
+    // Blokchain updates gRPC API example
+    // Note, we have to do another connection
+    const blockchainUpdatesChannel = w.grpc.mkDefaultChannel('grpc.wavesnodes.com:6881') // 6881 instead of 6870
+      
+    const blockchainUpdatesApi = w.api.waves.events.grpc.mkBlockchainUpdatesApi(blockchainUpdatesChannel)
+    blockchainUpdatesApi.getBlockUpdate(
         {height: 1},
         (error, response) => {
             if (error === null) {
-                const signatureBytes = response?.block?.signature || new Buffer(0);
-                console.log(`[getBlock] The signature of block 1 is ${b58.encode(signatureBytes)}`)
-            } else console.error("[getBlock] Can't get a block 1", error)
+                const txnIds = (response?.update?.append?.transactionIds || []).map(x => b58.encode(x));
+                console.log(`[getBlockUpdate] Transactions of block 1: ${txnIds.join(", ")}`)
+            } else console.error(`[getBlockUpdate] Can't get transactions of block 1`, error)
         }
     )
     ```
@@ -124,7 +130,29 @@ We use:
         .on("error", (e) => console.error("[getTransactions] Failed", e))
     ```
 
-You might notice, that `waves.node.grpc.TransactionResponse`  
+Types and API clients correlates with a structure of proto-files. For example:
+* `waves/node/grpc/transactions_api.proto` relates to `waves.node.grpc`:
+    ```protobuf
+    package waves.node.grpc;
+    ```
+* It has the `TransactionResponse` message:
+    ```protobuf
+    // waves/node/grpc/transactions_api.proto
+    message TransactionResponse {
+    ```
+* So we have `waves.node.grpc.TransactionResponse`;
+* We used `w.api.waves.node.grpc.TransactionResponse` in the example.
+
+If you want to create a client of API that isn't listed in the example, you need:
+1. Find it among proto-files
+2. Write `w.api.{here.is.a.namespace.of.your.api}mk{Api name}`
+3. Then look at a method you are interested in:
+   a. If you see `stream` in the response like:
+   ```
+   rpc GetTransactions (TransactionsRequest) returns (stream TransactionResponse)
+   ```
+   Then you need to register an event handler for "data" event (see the "Streaming" example)
+   b. Otherwise, you need to provide only a callback (see the "One-shot" example)
 
 ## C#
 1. Add `App.config`, `packages.config` to your C# solution 
