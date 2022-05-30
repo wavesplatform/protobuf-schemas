@@ -3,7 +3,11 @@ name: Testing Node.js Package
 on:
   push:
     branches:
-      - 'js-api'
+      - master
+      - version-[0-9].[0-9]+.x
+    tags:
+      - v[0-9].[0-9]+.[0-9]+
+  pull_request:
 
 jobs:
   build:
