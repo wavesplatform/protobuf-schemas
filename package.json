@@ -1,6 +1,6 @@
 {
   "name": "@waves/protobuf-serialization",
-  "version": "1.4.2",
+  "version": "1.4.2-beta.1",
   "description": "Generated types and methods for encoding and decoding protobuf messages as well as working with gRPC services.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,6 +17,7 @@
   },
   "files": [
     "dist",
+    "grpc",
     "proto"
   ],
   "repository": {
