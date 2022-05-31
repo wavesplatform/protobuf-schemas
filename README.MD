@@ -88,7 +88,29 @@ Generating python sources requires python 3 or later. Run the following commands
 ```
 python3 -m venv .venv
 . .venv/bin/activate
-pip install grpcio grpcio-tools
-python -m grpc_tools.protoc --proto_path=./proto  --python_out=./target/python  `find ./proto -type f`
+pip install grpcio grpcio-tools base58
+git clone https://github.com/wavesplatform/protobuf-schemas.git
+python -m grpc_tools.protoc --proto_path=./protobuf-schemas/proto --python_out=. --grpc_python_out=. `find ./protobuf-schemas/proto -type f`
 ```
-Tweak `--python_out` parameter to generate files elsewhere. Target path should likely be absolute. 
+Tweak `--python_out` and `--grpc_python_out` parameters to generate files elsewhere. Target path should likely be absolute. Now you can use generated classes:
+```python
+import grpc
+from waves.events.grpc.blockchain_updates_pb2_grpc import BlockchainUpdatesApiStub
+from waves.events.grpc.blockchain_updates_pb2 import SubscribeRequest
+from base58 import b58encode, b58decode
+
+def asset_id(asset_id_bytes):
+    return len(asset_id_bytes) > 0 and b58encode(asset_id_bytes) or 'WAVES'
+
+def print_update(update):
+    update_id = b58encode(update.id)
+    print(f'block {update_id}:')
+    for (tx_id, tx_state_update) in zip(update.append.transaction_ids, update.append.transaction_state_updates):
+        print(f'  tx {b58encode(tx_id)}:')
+        for balance in tx_state_update.balances:
+            print(f'    {b58encode(balance.address)}: {balance.amount_before} -> {balance.amount_after.amount} [{asset_id(balance.amount_after.asset_id)}]')
+
+with grpc.insecure_channel('grpc.wavesnodes.com:6881') as channel:
+    for block in BlockchainUpdatesApiStub(channel).Subscribe(SubscribeRequest(from_height=3135450, to_height=3135470)):
+        print_update(block.update)
+```
