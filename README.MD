@@ -90,9 +90,9 @@ python3 -m venv .venv
 . .venv/bin/activate
 pip install grpcio grpcio-tools base58
 git clone https://github.com/wavesplatform/protobuf-schemas.git
-python -m grpc_tools.protoc --proto_path=./protobuf-schemas/proto --python_out=. --python_grpc_out=. `find ./protobuf-schemas/proto -type f`
+python -m grpc_tools.protoc --proto_path=./protobuf-schemas/proto --python_out=. --grpc_python_out=. `find ./protobuf-schemas/proto -type f`
 ```
-Tweak `--python_out` and `--python_grpc_out` parameters to generate files elsewhere. Target path should likely be absolute. Now you can use generated classes:
+Tweak `--python_out` and `--grpc_python_out` parameters to generate files elsewhere. Target path should likely be absolute. Now you can use generated classes:
 ```python
 import grpc
 from waves.events.grpc.blockchain_updates_pb2_grpc import BlockchainUpdatesApiStub
