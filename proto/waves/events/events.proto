@@ -158,13 +158,14 @@ message TransactionMetadata {
     }
 
     message ExchangeMetadata {
+        /*
+        Fields starting with `order_*` represent order metadata.
+        Each of them is a collection of exactly 2 elements.
+        Element indexes correspond to their parent order indexes in the exchange transaction.
+        */
         repeated bytes order_ids = 1;
-        repeated OrderMetadata orders_metadata = 2;
-
-        message OrderMetadata {
-            bytes sender_public_key = 1;
-            bytes sender_address = 2;
-        }
+        repeated bytes order_sender_addresses = 2;
+        repeated bytes order_sender_public_keys = 3;
     }
 
     message InvokeScriptMetadata {
