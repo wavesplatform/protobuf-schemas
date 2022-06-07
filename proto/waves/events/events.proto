@@ -158,6 +158,23 @@ message TransactionMetadata {
 
     message ExchangeMetadata {
         repeated bytes order_ids = 1;
+
+        repeated OrderMetadata orders_metadata = 2;
+
+        message OrderMetadata {
+            bytes id = 1; // duplicates existing `repeated bytes order_ids = 1;`. TODO discuss
+            bytes sender_public_key = 2;
+
+            oneof chain_specific_metadata {
+                WavesOrderMetadata waves_metadata = 3;
+                EthereumOrderMetadata ethereum_metadata = 4;
+            }
+
+            message WavesOrderMetadata {}
+            message EthereumOrderMetadata {
+                bytes sender_address = 3;
+            }
+        }
     }
 
     message InvokeScriptMetadata {
