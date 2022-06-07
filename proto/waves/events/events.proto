@@ -163,7 +163,7 @@ message TransactionMetadata {
 
         message OrderMetadata {
             bytes id = 1; // duplicates existing `repeated bytes order_ids = 1;`. TODO discuss
-            bytes sender_public_key = 2;
+            bytes sender_address = 2;
 
             oneof chain_specific_metadata {
                 WavesOrderMetadata waves_metadata = 3;
@@ -172,7 +172,7 @@ message TransactionMetadata {
 
             message WavesOrderMetadata {}
             message EthereumOrderMetadata {
-                bytes sender_address = 3;
+                bytes sender_public_key = 1;
             }
         }
     }
