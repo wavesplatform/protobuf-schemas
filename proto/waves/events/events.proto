@@ -120,12 +120,12 @@ message StateUpdate {
         int32 last_updated = 11;
 
         /*
-                Related to a past behavior in the blockchain when it was possible to reissue
-                assets so that the total volume became more then int64 max value.
-                This field represents accurate volume even for those assets.
-                Can be ignored if the target system does not need such accuracy.
-                Encoding: like Java BigInteger, https://docs.oracle.com/javase/7/docs/api/java/math/BigInteger.html#toByteArray()
-            */
+        Related to a past behavior in the blockchain when it was possible to reissue
+        assets so that the total volume became more then int64 max value.
+        This field represents accurate volume even for those assets.
+        Can be ignored if the target system does not need such accuracy.
+        Encoding: like Java BigInteger, https://docs.oracle.com/javase/7/docs/api/java/math/BigInteger.html#toByteArray()
+        */
         bytes safe_volume = 20;
     }
 
@@ -139,7 +139,6 @@ message StateUpdate {
 message TransactionMetadata {
     bytes sender_address = 1;
     oneof metadata {
-        // <TransactionName>Metadata <transaction_name> = 1<TransactionNumber>
         TransferMetadata transfer = 104;
         ExchangeMetadata exchange = 107;
         MassTransferMetadata mass_transfer = 111;
@@ -148,7 +147,6 @@ message TransactionMetadata {
         EthereumMetadata ethereum = 301;
     };
 
-    // message <TransactionName>Metadata { ... }
     message TransferMetadata {
         bytes recipient_address = 1;
     }
