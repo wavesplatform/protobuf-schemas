@@ -191,6 +191,11 @@ message TransactionMetadata {
         bytes recipient_address = 1;
     }
 
+    message EthereumTransferMetadata {
+        bytes recipient_address = 1;
+        Amount amount = 2;
+    }
+
     message EthereumMetadata {
         // bytes sender_address = 1;
         int64 timestamp = 2;
@@ -198,7 +203,7 @@ message TransactionMetadata {
         bytes sender_public_key = 4;
 
         oneof Action {
-            TransferMetadata transfer = 10;
+            EthereumTransferMetadata transfer = 10;
             InvokeScriptMetadata invoke = 11;
         }
     }
