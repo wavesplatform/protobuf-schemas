@@ -137,6 +137,7 @@ message StateUpdate {
 }
 
 message TransactionMetadata {
+    bytes sender_address = 1;
     oneof metadata {
         // <TransactionName>Metadata <transaction_name> = 1<TransactionNumber>
         TransferMetadata transfer = 104;
@@ -158,13 +159,11 @@ message TransactionMetadata {
 
     message ExchangeMetadata {
         repeated bytes order_ids = 1;
-
         repeated OrderMetadata orders_metadata = 2;
 
         message OrderMetadata {
-            bytes id = 1; // duplicates existing `repeated bytes order_ids = 1;`. TODO discuss
-            bytes sender_public_key = 2;
-            bytes sender_address = 3;
+            bytes sender_public_key = 1;
+            bytes sender_address = 2;
         }
     }
 
@@ -175,7 +174,7 @@ message TransactionMetadata {
         repeated Amount payments = 4;
         InvokeScriptResult result = 5;
 
-        bytes sender_address = 6;
+        // bytes sender_address = 6;
 
         message Argument {
             message List {
@@ -197,8 +196,10 @@ message TransactionMetadata {
     }
 
     message EthereumMetadata {
-        bytes sender_address = 1;
+        // bytes sender_address = 1;
         int64 timestamp = 2;
+        int64 fee = 3;
+        bytes sender_public_key = 4;
 
         oneof Action {
             TransferMetadata transfer = 10;
