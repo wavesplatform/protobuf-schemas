@@ -120,12 +120,12 @@ message StateUpdate {
         int32 last_updated = 11;
 
         /*
-                Related to a past behavior in the blockchain when it was possible to reissue
-                assets so that the total volume became more then int64 max value.
-                This field represents accurate volume even for those assets.
-                Can be ignored if the target system does not need such accuracy.
-                Encoding: like Java BigInteger, https://docs.oracle.com/javase/7/docs/api/java/math/BigInteger.html#toByteArray()
-            */
+        Related to a past behavior in the blockchain when it was possible to reissue
+        assets so that the total volume became more then int64 max value.
+        This field represents accurate volume even for those assets.
+        Can be ignored if the target system does not need such accuracy.
+        Encoding: like Java BigInteger, https://docs.oracle.com/javase/7/docs/api/java/math/BigInteger.html#toByteArray()
+        */
         bytes safe_volume = 20;
     }
 
@@ -137,8 +137,8 @@ message StateUpdate {
 }
 
 message TransactionMetadata {
+    bytes sender_address = 1;
     oneof metadata {
-        // <TransactionName>Metadata <transaction_name> = 1<TransactionNumber>
         TransferMetadata transfer = 104;
         ExchangeMetadata exchange = 107;
         MassTransferMetadata mass_transfer = 111;
@@ -147,7 +147,6 @@ message TransactionMetadata {
         EthereumMetadata ethereum = 301;
     };
 
-    // message <TransactionName>Metadata { ... }
     message TransferMetadata {
         bytes recipient_address = 1;
     }
@@ -157,7 +156,14 @@ message TransactionMetadata {
     }
 
     message ExchangeMetadata {
+        /*
+        Fields starting with `order_*` represent order metadata.
+        Each of them is a collection of exactly 2 elements.
+        Element indexes correspond to their parent order indexes in the exchange transaction.
+        */
         repeated bytes order_ids = 1;
+        repeated bytes order_sender_addresses = 2;
+        repeated bytes order_sender_public_keys = 3;
     }
 
     message InvokeScriptMetadata {
@@ -167,7 +173,7 @@ message TransactionMetadata {
         repeated Amount payments = 4;
         InvokeScriptResult result = 5;
 
-        bytes sender_address = 6;
+        // bytes sender_address = 6;
 
         message Argument {
             message List {
@@ -188,12 +194,19 @@ message TransactionMetadata {
         bytes recipient_address = 1;
     }
 
+    message EthereumTransferMetadata {
+        bytes recipient_address = 1;
+        Amount amount = 2;
+    }
+
     message EthereumMetadata {
-        bytes sender_address = 1;
+        // bytes sender_address = 1;
         int64 timestamp = 2;
+        int64 fee = 3;
+        bytes sender_public_key = 4;
 
         oneof Action {
-            TransferMetadata transfer = 10;
+            EthereumTransferMetadata transfer = 10;
             InvokeScriptMetadata invoke = 11;
         }
     }
