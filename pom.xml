@@ -13,7 +13,7 @@
     <groupId>com.wavesplatform</groupId>
     <artifactId>protobuf-schemas</artifactId>
     <packaging>jar</packaging>
-    <version>1.4.3-SNAPSHOT</version>
+    <version>1.4.3</version>
 
     <name>Waves Node protobuf classes</name>
     <description>Waves Node protobuf java classes</description>
