@@ -1,3 +1,6 @@
+// Re-export prost & tonic crates, so that users of this library can use the same versions seamlessly
+pub use {prost, tonic};
+
 pub mod waves {
     tonic::include_proto!("waves");
 
