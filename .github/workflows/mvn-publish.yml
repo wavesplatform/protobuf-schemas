@@ -39,7 +39,7 @@ jobs:
             echo Setting version to $mvn_version
           elif [[ ! $mvn_version =~ -SNAPSHOT$ ]] ; then
             echo Refusing to publish non-snapshot version $mvn_version
-            echo '::set-output name=skip-publish::true'
+            echo echo "skip-publish=true" >> $GITHUB_OUTPUT
           fi
       - uses: samuelmeuli/action-maven-publish@v1.4.0
         if:
