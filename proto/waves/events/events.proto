@@ -12,10 +12,24 @@ message BlockchainUpdated {
     bytes id = 1;
     int32 height = 2;
 
+    message BlockchainFeatureStatus {
+        enum FeatureStatus {
+            UNDEFINED = 0;
+            APPROVED = 1;
+            ACTIVATED = 2;
+        }
+
+        int32 id = 1;
+        FeatureStatus before = 2;
+        FeatureStatus after = 3;
+    }
+
     message Append {
         message BlockAppend {
             Block block = 1;
             int64 updated_waves_amount = 2;
+            repeated BlockchainFeatureStatus updated_features = 3;
+            bytes vrf = 4;
         }
 
         message MicroBlockAppend {
@@ -45,6 +59,8 @@ message BlockchainUpdated {
         repeated bytes removed_transaction_ids = 2;
         repeated Block removed_blocks = 3;
         StateUpdate rollback_state_update = 4;
+        repeated BlockchainFeatureStatus updated_features = 5;
+        bytes vrf = 6;
     }
 
     oneof update {
@@ -61,6 +77,7 @@ message StateUpdate {
     repeated DataEntryUpdate data_entries = 3;
     repeated AssetStateUpdate assets = 4;
     repeated LeaseUpdate individual_leases = 5;
+    repeated ScriptUpdate scripts = 6;
 
     message BalanceUpdate {
         bytes address = 1;
@@ -133,6 +150,12 @@ message StateUpdate {
         bytes id = 1;
         int32 decimals = 2;
         string name = 3;
+    }
+
+    message ScriptUpdate {
+        bytes d_app_address = 1;
+        bytes before = 2;
+        bytes after = 3;
     }
 }
 
