@@ -141,7 +141,7 @@ message StateUpdate {
     }
 
     message ScriptUpdate {
-        bytes d_app_address = 1;
+        bytes address = 1;
         bytes before = 2;
         bytes after = 3;
     }
