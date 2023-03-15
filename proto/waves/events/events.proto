@@ -118,6 +118,8 @@ message StateUpdate {
         int64 sponsorship = 9;
         bool nft = 10;
         int32 last_updated = 11;
+        int32 sequence_in_block = 12;
+        int32 issue_height = 13;
 
         /*
         Related to a past behavior in the blockchain when it was possible to reissue
