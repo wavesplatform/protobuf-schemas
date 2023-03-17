@@ -38,4 +38,6 @@ message AssetInfoResponse {
     int64 sponsorship = 8;
     SignedTransaction issue_transaction = 11;
     int64 sponsor_balance = 10;
+    int32 sequence_in_block = 12;
+    int32 issue_height = 13;
 }
