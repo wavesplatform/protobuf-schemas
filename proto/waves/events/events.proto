@@ -16,6 +16,8 @@ message BlockchainUpdated {
         message BlockAppend {
             Block block = 1;
             int64 updated_waves_amount = 2;
+            repeated int32 activated_features = 3;
+            bytes vrf = 4;
         }
 
         message MicroBlockAppend {
@@ -45,6 +47,7 @@ message BlockchainUpdated {
         repeated bytes removed_transaction_ids = 2;
         repeated Block removed_blocks = 3;
         StateUpdate rollback_state_update = 4;
+        repeated int32 deactivated_features = 5;
     }
 
     oneof update {
@@ -61,6 +64,8 @@ message StateUpdate {
     repeated DataEntryUpdate data_entries = 3;
     repeated AssetStateUpdate assets = 4;
     repeated LeaseUpdate individual_leases = 5;
+    repeated ScriptUpdate scripts = 6;
+    repeated string deleted_aliases = 7;
 
     message BalanceUpdate {
         bytes address = 1;
@@ -135,6 +140,12 @@ message StateUpdate {
         bytes id = 1;
         int32 decimals = 2;
         string name = 3;
+    }
+
+    message ScriptUpdate {
+        bytes address = 1;
+        bytes before = 2;
+        bytes after = 3;
     }
 }
 
