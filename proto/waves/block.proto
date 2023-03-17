@@ -18,6 +18,7 @@ message Block {
         bytes generator = 8;
         int64 reward_vote = 9;
         bytes transactions_root = 10;
+        bytes state_hash = 11;
     }
 
     Header header = 1;
