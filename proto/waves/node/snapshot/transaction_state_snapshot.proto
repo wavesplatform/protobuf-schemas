@@ -1,0 +1,101 @@
+syntax = "proto3";
+import "waves/amount.proto";
+import "waves/invoke_script_result.proto";
+
+message TransactionStateSnapshot {
+  repeated Balance balances = 1;
+  repeated LeaseBalance lease_balances = 2;
+  repeated Asset assets = 3;
+  repeated Alias aliases = 4;
+  repeated OrderFill order_fills = 5;
+  repeated LeaseState lease_states = 6;
+  repeated AccountScript account_scripts = 7;
+  repeated Sponsorship sponsorships = 8;
+  repeated ScriptResult script_results = 9;
+  repeated EthereumTransactionMeta ethereum_transaction_meta = 10;
+  int64 total_complexity = 11;
+
+  message Balance {
+    bytes address = 1;
+    Amount amount = 2;
+  }
+
+  message LeaseBalance {
+    bytes address = 1;
+    int64 in = 2;
+    int64 out = 3;
+  }
+
+  message LeaseState {
+    enum LeaseStatus {
+      INACTIVE = 0;
+      ACTIVE = 1;
+    }
+    bytes lease_id = 1;
+    LeaseStatus status = 2;
+    int64 amount = 3;
+    bytes sender = 4;
+    bytes recipient = 5;
+    bytes origin_transaction_id = 6;
+    int32 height = 7;
+  }
+
+  message Asset {
+    bytes asset_id = 1;
+    bytes issuer = 2;
+    int32 decimals = 3;
+    string name = 4;
+    string description = 5;
+    bool reissuable = 6;
+    bytes volume = 7;
+    bytes script = 8;
+    int64 complexity = 9;
+    bool nft = 10;
+    int32 last_updated = 11;
+    bytes source_transaction_id = 12;
+  }
+
+  message Alias {
+    bytes address = 1;
+    string alias = 2;
+  }
+
+  message OrderFill {
+    bytes order_id = 1;
+    int64 volume = 2;
+    int64 fee = 3;
+  }
+
+  message AccountScript {
+    bytes sender_public_key = 1;
+    bytes script = 2;
+    int64 verifier_complexity = 3;
+    map<string, int64> callable_complexities = 4;
+  }
+
+  message Sponsorship {
+    bytes asset_id = 1;
+    Amount min_fee = 2;
+  }
+
+  message ScriptResult {
+    bytes transaction_id = 1;
+    InvokeScriptResult result = 2;
+  }
+
+  message EthereumTransactionMeta {
+    bytes transaction_id = 1;
+    oneof payload {
+      Invocation invocation = 21;
+      Transfer transfer = 22;
+    }
+    message Invocation {
+      bytes function_call = 1;
+      repeated Amount payments = 2;
+    }
+    message Transfer {
+      bytes public_key_hash = 1;
+      Amount amount = 2;
+    }
+  }
+}
