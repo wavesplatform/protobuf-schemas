@@ -1,8 +1,8 @@
 syntax = "proto3";
-package waves.node.snapshot;
-option java_package = "com.wavesplatform.node.snapshot";
-option csharp_namespace = "Waves.Node.Snapshot";
-option go_package = "github.com/wavesplatform/gowaves/pkg/grpc/generated/waves/node/snapshot";
+package waves;
+option java_package = "com.wavesplatform.protobuf.snapshot";
+option csharp_namespace = "Waves";
+option go_package = "github.com/wavesplatform/gowaves/pkg/grpc/generated/waves";
 
 import "waves/amount.proto";
 import "waves/invoke_script_result.proto";
