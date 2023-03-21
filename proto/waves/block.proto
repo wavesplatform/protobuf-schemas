@@ -32,6 +32,7 @@ message MicroBlock {
     bytes updated_block_signature = 3;
     bytes sender_public_key = 4;
     repeated SignedTransaction transactions = 5;
+    bytes state_hash = 6;
 }
 
 message SignedMicroBlock {
