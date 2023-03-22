@@ -7,22 +7,24 @@ option go_package = "github.com/wavesplatform/gowaves/pkg/grpc/generated/waves";
 import "waves/amount.proto";
 import "waves/invoke_script_result.proto";
 import "waves/recipient.proto";
+import "waves/transaction.proto";
 
 message TransactionStateSnapshot {
   repeated Balance balances = 1;
   repeated LeaseBalance lease_balances = 2;
-  repeated AssetStatic assetStatics = 3;
-  repeated AssetVolume assetVolumes = 4;
-  repeated AssetNameAndDescription assetNamesAndDescriptions = 5;
-  repeated AssetScript assetScripts = 6;
+  repeated AssetStatic asset_statics = 3;
+  repeated AssetVolume asset_volumes = 4;
+  repeated AssetNameAndDescription asset_names_and_descriptions = 5;
+  repeated AssetScript asset_scripts = 6;
   repeated Alias aliases = 7;
   repeated OrderFill order_fills = 8;
   repeated LeaseState lease_states = 9;
   repeated AccountScript account_scripts = 10;
-  repeated Sponsorship sponsorships = 11;
-  repeated ScriptResult script_results = 12;
-  repeated EthereumTransactionMeta ethereum_transaction_meta = 13;
-  int64 total_complexity = 14;
+  repeated AccountData account_data = 11;
+  repeated Sponsorship sponsorships = 12;
+  repeated ScriptResult script_results = 13;
+  repeated EthereumTransactionMeta ethereum_transaction_meta = 14;
+  int64 total_complexity = 15;
 
   message Balance {
     bytes address = 1;
@@ -97,6 +99,11 @@ message TransactionStateSnapshot {
     bytes script = 2;
     int64 verifier_complexity = 3;
     map<string, int64> callable_complexities = 4;
+  }
+
+  message AccountData {
+    bytes address = 1;
+    DataTransactionData.DataEntry entry = 2;
   }
 
   message Sponsorship {
