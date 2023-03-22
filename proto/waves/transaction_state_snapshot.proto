@@ -6,19 +6,23 @@ option go_package = "github.com/wavesplatform/gowaves/pkg/grpc/generated/waves";
 
 import "waves/amount.proto";
 import "waves/invoke_script_result.proto";
+import "waves/recipient.proto";
 
 message TransactionStateSnapshot {
   repeated Balance balances = 1;
   repeated LeaseBalance lease_balances = 2;
-  repeated Asset assets = 3;
-  repeated Alias aliases = 4;
-  repeated OrderFill order_fills = 5;
-  repeated LeaseState lease_states = 6;
-  repeated AccountScript account_scripts = 7;
-  repeated Sponsorship sponsorships = 8;
-  repeated ScriptResult script_results = 9;
-  repeated EthereumTransactionMeta ethereum_transaction_meta = 10;
-  int64 total_complexity = 11;
+  repeated AssetStatic assetStatics = 3;
+  repeated AssetVolume assetVolumes = 4;
+  repeated AssetNameAndDescription assetNamesAndDescriptions = 5;
+  repeated AssetScript assetScripts = 6;
+  repeated Alias aliases = 7;
+  repeated OrderFill order_fills = 8;
+  repeated LeaseState lease_states = 9;
+  repeated AccountScript account_scripts = 10;
+  repeated Sponsorship sponsorships = 11;
+  repeated ScriptResult script_results = 12;
+  repeated EthereumTransactionMeta ethereum_transaction_meta = 13;
+  int64 total_complexity = 14;
 
   message Balance {
     bytes address = 1;
@@ -40,24 +44,36 @@ message TransactionStateSnapshot {
     LeaseStatus status = 2;
     int64 amount = 3;
     bytes sender = 4;
-    bytes recipient = 5;
+    Recipient recipient = 5;
     bytes origin_transaction_id = 6;
     int32 height = 7;
   }
 
-  message Asset {
+  message AssetStatic {
     bytes asset_id = 1;
-    bytes issuer = 2;
-    int32 decimals = 3;
-    string name = 4;
-    string description = 5;
-    bool reissuable = 6;
-    bytes volume = 7;
-    bytes script = 8;
-    int64 complexity = 9;
-    bool nft = 10;
-    int32 last_updated = 11;
-    bytes source_transaction_id = 12;
+    bytes source_transaction_id = 2;
+    bytes issuer = 3;
+    int32 decimals = 4;
+    bool nft = 5;
+  }
+
+  message AssetVolume {
+    bytes asset_id = 1;
+    bool reissuable = 2;
+    bytes volume = 3;
+  }
+
+  message AssetNameAndDescription {
+    bytes asset_id = 1;
+    bytes name = 2;
+    bytes description = 3;
+    bytes lastUpdatedAt = 4;
+  }
+
+  message AssetScript {
+    bytes asset_id = 1;
+    bytes script = 2;
+    int64 complexity = 3;
   }
 
   message Alias {
@@ -80,7 +96,7 @@ message TransactionStateSnapshot {
 
   message Sponsorship {
     bytes asset_id = 1;
-    Amount min_fee = 2;
+    int64 min_fee = 2;
   }
 
   message ScriptResult {
