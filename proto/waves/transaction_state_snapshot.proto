@@ -65,9 +65,9 @@ message TransactionStateSnapshot {
 
   message AssetNameAndDescription {
     bytes asset_id = 1;
-    bytes name = 2;
-    bytes description = 3;
-    bytes lastUpdatedAt = 4;
+    string name = 2;
+    string description = 3;
+    int32 last_updated = 4;
   }
 
   message AssetScript {
