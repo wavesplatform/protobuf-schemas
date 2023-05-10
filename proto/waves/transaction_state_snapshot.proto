@@ -6,7 +6,6 @@ option go_package = "github.com/wavesplatform/gowaves/pkg/grpc/generated/waves";
 
 import "waves/amount.proto";
 import "waves/invoke_script_result.proto";
-import "waves/recipient.proto";
 import "waves/transaction.proto";
 
 message TransactionStateSnapshot {
@@ -45,7 +44,7 @@ message TransactionStateSnapshot {
     }
     int64 amount = 3;
     bytes sender = 4;
-    Recipient recipient = 5;
+    bytes recipient = 5;
     bytes origin_transaction_id = 6;
     int32 height = 7;
 
