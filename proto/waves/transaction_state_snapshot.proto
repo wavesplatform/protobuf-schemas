@@ -103,7 +103,7 @@ message TransactionStateSnapshot {
 
   message AccountData {
     bytes address = 1;
-    repeated DataTransactionData.DataEntry entry = 2;
+    repeated DataTransactionData.DataEntry entries = 2;
   }
 
   message Sponsorship {
