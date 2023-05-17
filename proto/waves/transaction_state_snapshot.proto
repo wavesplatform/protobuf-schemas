@@ -94,11 +94,9 @@ message TransactionStateSnapshot {
   }
 
   message AccountScript {
-    bytes sender_address = 1;
-    bytes sender_public_key = 2;
-    bytes script = 3;
-    int64 verifier_complexity = 4;
-    map<string, int64> callable_complexities = 5;
+    bytes sender_public_key = 1;
+    bytes script = 2;
+    int64 verifier_complexity = 3;
   }
 
   message AccountData {
