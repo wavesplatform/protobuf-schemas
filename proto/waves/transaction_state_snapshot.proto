@@ -58,7 +58,7 @@ message TransactionStateSnapshot {
   message AssetStatic {
     bytes asset_id = 1;
     bytes source_transaction_id = 2;
-    bytes issuer = 3;
+    bytes issuer_public_key = 3;
     int32 decimals = 4;
     bool nft = 5;
   }
