@@ -18,6 +18,7 @@ message Block {
         bytes generator = 8;
         int64 reward_vote = 9;
         bytes transactions_root = 10;
+        bytes state_hash = 11;
     }
 
     Header header = 1;
@@ -31,6 +32,7 @@ message MicroBlock {
     bytes updated_block_signature = 3;
     bytes sender_public_key = 4;
     repeated SignedTransaction transactions = 5;
+    bytes state_hash = 6;
 }
 
 message SignedMicroBlock {
