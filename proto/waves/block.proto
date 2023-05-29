@@ -10,7 +10,6 @@ message Block {
     message Header {
         message ChallengedHeader {
             repeated uint32 feature_votes = 3;
-            int32 version = 5;
             bytes generator = 6;
             int64 reward_vote = 7;
             bytes header_signature = 8;
