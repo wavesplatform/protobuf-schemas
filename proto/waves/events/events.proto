@@ -14,10 +14,16 @@ message BlockchainUpdated {
 
     message Append {
         message BlockAppend {
+            message RewardShare {
+                bytes address = 1;
+                int64 reward = 2;
+            }
+
             Block block = 1;
             int64 updated_waves_amount = 2;
             repeated int32 activated_features = 3;
             bytes vrf = 4;
+            repeated RewardShare rewardShares = 5;
         }
 
         message MicroBlockAppend {
