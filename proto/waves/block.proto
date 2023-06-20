@@ -9,11 +9,14 @@ import "waves/transaction.proto";
 message Block {
     message Header {
         message ChallengedHeader {
-            repeated uint32 feature_votes = 1;
-            bytes generator = 2;
-            int64 reward_vote = 3;
-            bytes state_hash = 4;
-            bytes header_signature = 5;
+            int64 base_target = 1;
+            bytes generation_signature = 2;
+            repeated uint32 feature_votes = 3;
+            int64 timestamp = 4;
+            bytes generator = 5;
+            int64 reward_vote = 6;
+            bytes state_hash = 7;
+            bytes header_signature = 8;
         }
 
         int32 chain_id = 1;
