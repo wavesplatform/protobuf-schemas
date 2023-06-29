@@ -23,7 +23,7 @@ message TransactionStateSnapshot {
   repeated Sponsorship sponsorships = 12;
   repeated ScriptResult script_results = 13;
   repeated EthereumTransactionMeta ethereum_transaction_meta = 14;
-  int64 total_complexity = 15;
+  TransactionStatus transaction_status = 15;
 
   message Balance {
     bytes address = 1;
@@ -128,5 +128,11 @@ message TransactionStateSnapshot {
       bytes public_key_hash = 1;
       Amount amount = 2;
     }
+  }
+
+  enum TransactionStatus {
+    SUCCEEDED = 0;
+    FAILED = 1;
+    ELIDED = 2;
   }
 }
