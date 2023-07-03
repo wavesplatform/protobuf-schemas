@@ -21,9 +21,7 @@ message TransactionStateSnapshot {
   repeated AccountScript account_scripts = 10;
   repeated AccountData account_data = 11;
   repeated Sponsorship sponsorships = 12;
-  repeated ScriptResult script_results = 13;
-  repeated EthereumTransactionMeta ethereum_transaction_meta = 14;
-  TransactionStatus transaction_status = 15;
+  TransactionStatus transaction_status = 13;
 
   message Balance {
     bytes address = 1;
