@@ -5,7 +5,6 @@ option csharp_namespace = "Waves";
 option go_package = "github.com/wavesplatform/gowaves/pkg/grpc/generated/waves";
 
 import "waves/amount.proto";
-import "waves/invoke_script_result.proto";
 import "waves/transaction.proto";
 
 message TransactionStateSnapshot {
