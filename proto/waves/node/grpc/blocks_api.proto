@@ -5,6 +5,7 @@ option csharp_namespace = "Waves.Node.Grpc";
 option go_package = "github.com/wavesplatform/gowaves/pkg/grpc/generated/waves/node/grpc";
 
 import "waves/block.proto";
+import "waves/reward_share.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/wrappers.proto";
 
@@ -39,4 +40,5 @@ message BlockWithHeight {
     Block block = 1;
     uint32 height = 2;
     bytes vrf = 3;
+    repeated RewardShare reward_shares = 4;
 }
