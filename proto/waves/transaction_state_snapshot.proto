@@ -76,7 +76,6 @@ message TransactionStateSnapshot {
   message AssetScript {
     bytes asset_id = 1;
     bytes script = 2;
-    int64 complexity = 3;
   }
 
   message Alias {
