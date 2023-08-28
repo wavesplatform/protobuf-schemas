@@ -1,0 +1,113 @@
+syntax = "proto3";
+package waves;
+option java_package = "com.wavesplatform.protobuf.snapshot";
+option csharp_namespace = "Waves";
+option go_package = "github.com/wavesplatform/gowaves/pkg/grpc/generated/waves";
+
+import "waves/amount.proto";
+import "waves/transaction.proto";
+
+message TransactionStateSnapshot {
+  repeated Balance balances = 1;
+  repeated LeaseBalance lease_balances = 2;
+  repeated AssetStatic asset_statics = 3;
+  repeated AssetVolume asset_volumes = 4;
+  repeated AssetNameAndDescription asset_names_and_descriptions = 5;
+  repeated AssetScript asset_scripts = 6;
+  repeated Alias aliases = 7;
+  repeated OrderFill order_fills = 8;
+  repeated LeaseState lease_states = 9;
+  repeated AccountScript account_scripts = 10;
+  repeated AccountData account_data = 11;
+  repeated Sponsorship sponsorships = 12;
+  TransactionStatus transaction_status = 13;
+
+  message Balance {
+    bytes address = 1;
+    Amount amount = 2;
+  }
+
+  message LeaseBalance {
+    bytes address = 1;
+    int64 in = 2;
+    int64 out = 3;
+  }
+
+  message LeaseState {
+    bytes lease_id = 1;
+    oneof status {
+      Active active = 21;
+      Cancelled cancelled = 22;
+    }
+    int64 amount = 3;
+    bytes sender = 4;
+    bytes recipient = 5;
+    bytes origin_transaction_id = 6;
+    int32 height = 7;
+
+    message Active {}
+    message Cancelled {
+      int32 height = 1;
+      bytes transaction_id = 2;
+    }
+  }
+
+  message AssetStatic {
+    bytes asset_id = 1;
+    bytes source_transaction_id = 2;
+    bytes issuer_public_key = 3;
+    int32 decimals = 4;
+    bool nft = 5;
+  }
+
+  message AssetVolume {
+    bytes asset_id = 1;
+    bool reissuable = 2;
+    bytes volume = 3;
+  }
+
+  message AssetNameAndDescription {
+    bytes asset_id = 1;
+    string name = 2;
+    string description = 3;
+    int32 last_updated = 4;
+  }
+
+  message AssetScript {
+    bytes asset_id = 1;
+    bytes script = 2;
+  }
+
+  message Alias {
+    bytes address = 1;
+    string alias = 2;
+  }
+
+  message OrderFill {
+    bytes order_id = 1;
+    int64 volume = 2;
+    int64 fee = 3;
+  }
+
+  message AccountScript {
+    bytes sender_public_key = 1;
+    bytes script = 2;
+    int64 verifier_complexity = 3;
+  }
+
+  message AccountData {
+    bytes address = 1;
+    repeated DataTransactionData.DataEntry entries = 2;
+  }
+
+  message Sponsorship {
+    bytes asset_id = 1;
+    int64 min_fee = 2;
+  }
+}
+
+enum TransactionStatus {
+  SUCCEEDED = 0;
+  FAILED = 1;
+  ELIDED = 2;
+}
