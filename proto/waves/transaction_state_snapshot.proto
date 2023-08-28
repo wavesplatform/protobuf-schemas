@@ -104,10 +104,10 @@ message TransactionStateSnapshot {
     bytes asset_id = 1;
     int64 min_fee = 2;
   }
+}
 
-  enum TransactionStatus {
-    SUCCEEDED = 0;
-    FAILED = 1;
-    ELIDED = 2;
-  }
+enum TransactionStatus {
+  SUCCEEDED = 0;
+  FAILED = 1;
+  ELIDED = 2;
 }
