@@ -35,19 +35,10 @@ message TransactionStateSnapshot {
 
   message LeaseState {
     bytes lease_id = 1;
-    oneof status {
-      Active active = 21;
-      Cancelled cancelled = 22;
-    }
+    bool status = 2;
     int64 amount = 3;
     bytes sender = 4;
     bytes recipient = 5;
-
-    message Active {}
-    message Cancelled {
-      int32 height = 1;
-      bytes transaction_id = 2;
-    }
   }
 
   message AssetStatic {
