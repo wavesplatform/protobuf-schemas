@@ -13,11 +13,11 @@ message TransactionStateSnapshot {
   repeated AssetStatic asset_statics = 3;
   repeated AssetVolume asset_volumes = 4;
   repeated AssetNameAndDescription asset_names_and_descriptions = 5;
-  repeated AssetScript asset_scripts = 6;
-  repeated Alias aliases = 7;
+  AssetScript asset_scripts = 6;
+  Alias aliases = 7;
   repeated OrderFill order_fills = 8;
   repeated LeaseState lease_states = 9;
-  repeated AccountScript account_scripts = 10;
+  AccountScript account_scripts = 10;
   repeated AccountData account_data = 11;
   repeated Sponsorship sponsorships = 12;
   TransactionStatus transaction_status = 13;
@@ -49,10 +49,9 @@ message TransactionStateSnapshot {
 
   message AssetStatic {
     bytes asset_id = 1;
-    bytes source_transaction_id = 2;
-    bytes issuer_public_key = 3;
-    int32 decimals = 4;
-    bool nft = 5;
+    bytes issuer_public_key = 2;
+    int32 decimals = 3;
+    bool nft = 4;
   }
 
   message AssetVolume {
@@ -65,7 +64,6 @@ message TransactionStateSnapshot {
     bytes asset_id = 1;
     string name = 2;
     string description = 3;
-    int32 last_updated = 4;
   }
 
   message AssetScript {
