@@ -85,7 +85,7 @@ message InvokeScriptResult {
         InvokeScriptResult stateChanges = 4;
     }
 
-    repeated DataTransactionData.DataEntry data = 1;
+    repeated DataEntry data = 1;
     repeated Payment transfers = 2;
     repeated Issue issues = 3;
     repeated Reissue reissues = 4;

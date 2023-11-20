@@ -49,7 +49,7 @@ message BalanceResponse {
 
 message DataEntryResponse {
     bytes address = 1;
-    DataTransactionData.DataEntry entry = 2;
+    DataEntry entry = 2;
 }
 
 message ScriptData {

@@ -66,17 +66,17 @@ message CreateAliasTransactionData {
     string alias = 1;
 };
 
-message DataTransactionData {
-    message DataEntry {
-        string key = 1;
-        oneof value {
-            int64 int_value = 10;
-            bool bool_value = 11;
-            bytes binary_value = 12;
-            string string_value = 13;
-        };
+message DataEntry {
+    string key = 1;
+    oneof value {
+        int64 int_value = 10;
+        bool bool_value = 11;
+        bytes binary_value = 12;
+        string string_value = 13;
     };
+};
 
+message DataTransactionData {
     repeated DataEntry data = 1;
 };
 
