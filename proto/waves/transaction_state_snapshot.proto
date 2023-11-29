@@ -10,17 +10,18 @@ import "waves/transaction.proto";
 message TransactionStateSnapshot {
   repeated Balance balances = 1;
   repeated LeaseBalance lease_balances = 2;
-  repeated AssetStatic asset_statics = 3;
-  repeated AssetVolume asset_volumes = 4;
-  repeated AssetNameAndDescription asset_names_and_descriptions = 5;
-  repeated AssetScript asset_scripts = 6;
-  repeated Alias aliases = 7;
-  repeated OrderFill order_fills = 8;
-  repeated LeaseState lease_states = 9;
-  repeated AccountScript account_scripts = 10;
-  repeated AccountData account_data = 11;
-  repeated Sponsorship sponsorships = 12;
-  TransactionStatus transaction_status = 13;
+  repeated NewLease new_leases = 3;
+  repeated CancelledLease cancelled_leases = 4;
+  repeated NewAsset asset_statics = 5;
+  repeated AssetVolume asset_volumes = 6;
+  repeated AssetNameAndDescription asset_names_and_descriptions = 7;
+  AssetScript asset_scripts = 8;
+  Alias aliases = 9;
+  repeated OrderFill order_fills = 10;
+  AccountScript account_scripts = 11;
+  repeated AccountData account_data = 12;
+  repeated Sponsorship sponsorships = 13;
+  TransactionStatus transaction_status = 14;
 
   message Balance {
     bytes address = 1;
@@ -33,26 +34,22 @@ message TransactionStateSnapshot {
     int64 out = 3;
   }
 
-  message LeaseState {
+  message NewLease {
     bytes lease_id = 1;
-    oneof status {
-      Active active = 21;
-      Cancelled cancelled = 22;
-    }
-    message Active {
-      int64 amount = 1;
-      bytes sender = 2;
-      bytes recipient = 3;
-    }
-    message Cancelled {}
+    bytes sender_public_key = 2;
+    bytes recipient_address = 3;
+    int64 amount = 4;
   }
 
-  message AssetStatic {
+  message CancelledLease {
+    bytes lease_id = 1;
+  }
+
+  message NewAsset {
     bytes asset_id = 1;
-    bytes source_transaction_id = 2;
-    bytes issuer_public_key = 3;
-    int32 decimals = 4;
-    bool nft = 5;
+    bytes issuer_public_key = 2;
+    int32 decimals = 3;
+    bool nft = 4;
   }
 
   message AssetVolume {
@@ -65,7 +62,6 @@ message TransactionStateSnapshot {
     bytes asset_id = 1;
     string name = 2;
     string description = 3;
-    int32 last_updated = 4;
   }
 
   message AssetScript {
@@ -92,7 +88,7 @@ message TransactionStateSnapshot {
 
   message AccountData {
     bytes address = 1;
-    repeated DataTransactionData.DataEntry entries = 2;
+    repeated DataEntry entries = 2;
   }
 
   message Sponsorship {

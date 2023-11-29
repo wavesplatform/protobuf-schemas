@@ -99,8 +99,8 @@ message StateUpdate {
 
     message DataEntryUpdate {
         bytes address = 1;
-        DataTransactionData.DataEntry data_entry = 2;
-        DataTransactionData.DataEntry data_entry_before = 10;
+        DataEntry data_entry = 2;
+        DataEntry data_entry_before = 10;
     }
 
     message AssetStateUpdate {
