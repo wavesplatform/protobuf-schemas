@@ -6,14 +6,14 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <grpc.version>1.59.0</grpc.version>
+        <grpc.version>1.60.0</grpc.version>
         <protoc.version>3.25.1</protoc.version>
     </properties>
 
     <groupId>com.wavesplatform</groupId>
     <artifactId>protobuf-schemas</artifactId>
     <packaging>jar</packaging>
-    <version>1.5.1-SNAPSHOT</version>
+    <version>1.5.1</version>
 
     <name>Waves Node protobuf classes</name>
     <description>Waves Node protobuf java classes</description>
