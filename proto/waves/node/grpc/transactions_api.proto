@@ -11,6 +11,7 @@ import "waves/invoke_script_result.proto";
 
 service TransactionsApi {
     rpc GetTransactions (TransactionsRequest) returns (stream TransactionResponse);
+    rpc GetTransactionSnapshots (TransactionSnapshotsRequest) returns (stream TransactionSnapshotResponse);
     rpc GetStateChanges (TransactionsRequest) returns (stream InvokeScriptResultResponse) {
         option deprecated = true;
     };
