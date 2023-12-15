@@ -6,6 +6,7 @@ option go_package = "github.com/wavesplatform/gowaves/pkg/grpc/generated/waves/n
 
 import "waves/recipient.proto";
 import "waves/transaction.proto";
+import "waves/transaction_state_snapshot.proto";
 import "waves/invoke_script_result.proto";
 
 service TransactionsApi {
