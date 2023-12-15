@@ -54,6 +54,15 @@ message TransactionsRequest {
     repeated bytes transaction_ids = 3;
 }
 
+message TransactionSnapshotResponse {
+    bytes id = 1;
+    TransactionStateSnapshot snapshot = 2;
+}
+
+message TransactionSnapshotsRequest {
+    repeated bytes transaction_ids = 1;
+}
+
 message TransactionsByIdRequest {
     repeated bytes transaction_ids = 3;
 }
