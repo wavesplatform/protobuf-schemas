@@ -31,6 +31,7 @@ message Block {
         bytes transactions_root = 10;
         bytes state_hash = 11;
         ChallengedHeader challenged_header = 12;
+        repeated EndorseBlock endorsements = 13;
     }
 
     Header header = 1;
@@ -45,10 +46,18 @@ message MicroBlock {
     bytes sender_public_key = 4;
     repeated SignedTransaction transactions = 5;
     bytes state_hash = 6;
+    repeated EndorseBlock endorsements = 7;
 }
 
 message SignedMicroBlock {
     MicroBlock micro_block = 1;
     bytes signature = 2;
     bytes total_block_id = 3;
+}
+
+message EndorseBlock {
+    bytes endorser_public_key = 1;
+    bytes block_id = 2;
+    int32 block_height = 3;
+    bytes signature = 4;
 }
