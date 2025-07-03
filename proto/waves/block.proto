@@ -57,7 +57,8 @@ message SignedMicroBlock {
 
 message EndorseBlock {
     bytes endorser_public_key = 1;
-    bytes block_id = 2;
-    int32 block_height = 3;
-    bytes signature = 4;
+    bytes finalized_block_id = 2;
+    bytes block_id = 3;
+    int32 block_height = 4;
+    bytes signature = 5;
 }
