@@ -157,5 +157,6 @@ message InvokeExpressionTransactionData {
 }
 
 message CommitToGenerationTransactionData {
-    int64 generation_period_start = 1;
+    uint32 generation_period_start = 1;
+    bytes endorsement_public_key = 2;
 }

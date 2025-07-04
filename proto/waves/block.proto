@@ -47,6 +47,7 @@ message MicroBlock {
     repeated SignedTransaction transactions = 5;
     bytes state_hash = 6;
     repeated EndorseBlock endorsements = 7;
+    bytes aggregated_endorsement_signature = 8;
 }
 
 message SignedMicroBlock {
@@ -59,6 +60,6 @@ message EndorseBlock {
     bytes endorser_public_key = 1;
     bytes finalized_block_id = 2;
     bytes block_id = 3;
-    int32 block_height = 4;
+    uint32 block_height = 4;
     bytes signature = 5;
 }
