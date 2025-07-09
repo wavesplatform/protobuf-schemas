@@ -43,6 +43,7 @@ message Transaction {
         InvokeScriptTransactionData invoke_script = 116;
         UpdateAssetInfoTransactionData update_asset_info = 117;
         InvokeExpressionTransactionData invoke_expression = 119;
+        CommitToGenerationTransactionData commit_to_generation = 120;
     };
 };
 
@@ -153,4 +154,9 @@ message UpdateAssetInfoTransactionData {
 
 message InvokeExpressionTransactionData {
     bytes expression = 1;
+}
+
+message CommitToGenerationTransactionData {
+    bytes endorsement_key = 1;
+    bytes endorsement_key_signature = 2;
 }
