@@ -32,6 +32,7 @@ message Block {
         bytes state_hash = 11;
         ChallengedHeader challenged_header = 12;
         repeated EndorseBlock endorsements = 13;
+        bytes aggregated_endorsement_signature = 14; // BLS
     }
 
     Header header = 1;
@@ -47,7 +48,7 @@ message MicroBlock {
     repeated SignedTransaction transactions = 5;
     bytes state_hash = 6;
     repeated EndorseBlock endorsements = 7;
-    bytes aggregated_endorsement_signature = 8;
+    bytes aggregated_endorsement_signature = 8; // BLS
 }
 
 message SignedMicroBlock {
@@ -57,7 +58,7 @@ message SignedMicroBlock {
 }
 
 message EndorseBlock {
-    bytes endorser_public_key = 1;
+    bytes endorser_public_key = 1; // BLS
     bytes finalized_block_id = 2;
     bytes block_id = 3;
     uint32 block_height = 4;
