@@ -1,4 +1,5 @@
 syntax = "proto3";
+
 package waves;
 
 option java_package = "com.wavesplatform.protobuf.transaction";
@@ -157,6 +158,7 @@ message InvokeExpressionTransactionData {
 }
 
 message CommitToGenerationTransactionData {
-    bytes endorsement_key = 1;
-    bytes endorsement_key_signature = 2;
+    uint32 generation_period_start = 1;
+    bytes endorsement_key = 2;
+    bytes endorsement_key_signature = 3;
 }
