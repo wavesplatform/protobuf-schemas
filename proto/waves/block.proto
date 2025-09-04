@@ -64,7 +64,7 @@ message EndorseBlock {
 }
 
 message FinalizationVoting {
-    repeated bytes endorser_public_keys = 1; // BLS
+    bytes endorser_indexes = 1; // Bit vector
     bytes aggregated_endorsement_signature = 2; // BLS
     repeated EndorseBlock invalid_endorsements = 3;
 }
