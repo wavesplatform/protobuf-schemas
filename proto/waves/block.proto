@@ -58,9 +58,9 @@ message SignedMicroBlock {
 message EndorseBlock {
     int32 endorser_index = 1;
     bytes finalized_block_id = 2;
-    bytes block_id = 3;
-    uint32 block_height = 4;
-    bytes signature = 5;
+    uint32 finalized_block_height = 3;
+    bytes endorsed_block_id = 4;
+    bytes signature = 5; // BLS
 }
 
 message FinalizationVoting {
