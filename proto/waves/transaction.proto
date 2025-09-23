@@ -159,6 +159,6 @@ message InvokeExpressionTransactionData {
 
 message CommitToGenerationTransactionData {
     uint32 generation_period_start = 1;
-    bytes endorsement_key = 2;
-    bytes endorsement_key_signature = 3;
+    bytes endorser_public_key = 2; // BLS
+    bytes commitment_signature = 3; // BLS signature for endorser_public_key ++ generation_period_start
 }
