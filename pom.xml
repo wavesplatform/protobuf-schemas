@@ -6,7 +6,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <grpc.version>1.73.0</grpc.version>
+        <grpc.version>1.75.0</grpc.version>
         <protoc.version>4.31.1</protoc.version>
     </properties>
 
