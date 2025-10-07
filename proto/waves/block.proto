@@ -31,6 +31,7 @@ message Block {
         bytes transactions_root = 10;
         bytes state_hash = 11;
         ChallengedHeader challenged_header = 12;
+        FinalizationVoting finalization_voting = 13;
     }
 
     Header header = 1;
@@ -45,10 +46,25 @@ message MicroBlock {
     bytes sender_public_key = 4;
     repeated SignedTransaction transactions = 5;
     bytes state_hash = 6;
+    FinalizationVoting finalization_voting = 7;
 }
 
 message SignedMicroBlock {
     MicroBlock micro_block = 1;
     bytes signature = 2;
     bytes total_block_id = 3;
+}
+
+message EndorseBlock {
+    int32 endorser_index = 1;
+    bytes finalized_block_id = 2;
+    uint32 finalized_block_height = 3;
+    bytes endorsed_block_id = 4;
+    bytes signature = 5; // BLS
+}
+
+message FinalizationVoting {
+    repeated int32 endorser_indexes = 1; // In insertion order
+    bytes aggregated_endorsement_signature = 2; // BLS
+    repeated EndorseBlock conflict_endorsements = 3; // Without block_height
 }
