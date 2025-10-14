@@ -1,4 +1,5 @@
 syntax = "proto3";
+
 package waves;
 
 option java_package = "com.wavesplatform.protobuf.transaction";
@@ -43,6 +44,7 @@ message Transaction {
         InvokeScriptTransactionData invoke_script = 116;
         UpdateAssetInfoTransactionData update_asset_info = 117;
         InvokeExpressionTransactionData invoke_expression = 119;
+        CommitToGenerationTransactionData commit_to_generation = 120;
     };
 };
 
@@ -153,4 +155,10 @@ message UpdateAssetInfoTransactionData {
 
 message InvokeExpressionTransactionData {
     bytes expression = 1;
+}
+
+message CommitToGenerationTransactionData {
+    uint32 generation_period_start = 1;
+    bytes endorser_public_key = 2; // BLS
+    bytes commitment_signature = 3; // BLS signature for endorser_public_key ++ generation_period_start
 }

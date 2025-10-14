@@ -22,6 +22,7 @@ message TransactionStateSnapshot {
   repeated AccountData account_data = 12;
   repeated Sponsorship sponsorships = 13;
   TransactionStatus transaction_status = 14;
+  GenerationCommitment generation_commitment = 15;
 
   message Balance {
     bytes address = 1;
@@ -94,6 +95,11 @@ message TransactionStateSnapshot {
   message Sponsorship {
     bytes asset_id = 1;
     int64 min_fee = 2;
+  }
+
+  message GenerationCommitment {
+    bytes sender_public_key = 1;
+    bytes endorser_public_key = 2;
   }
 }
 
