@@ -64,7 +64,8 @@ message EndorseBlock {
 }
 
 message FinalizationVoting {
-    repeated int32 endorser_indexes = 1; // In insertion order
-    bytes aggregated_endorsement_signature = 2; // BLS
-    repeated EndorseBlock conflict_endorsements = 3; // Without block_height
+    repeated int32 endorser_indexes = 1;
+    int32 finalized_block_height = 2;
+    bytes aggregated_endorsement_signature = 3; // BLS
+    repeated EndorseBlock conflict_endorsements = 4;
 }
