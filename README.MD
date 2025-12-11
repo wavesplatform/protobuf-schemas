@@ -67,7 +67,7 @@ to your `.csproj` file. After this just build your project.
 or as alternative you can use util protoc, for example:
 ``` protoc --csharp_out=RelativePath  --proto_path=RelativePathToProtoDir RelativePathToProtoFile```
 
-Also there is a NuGet package WavesPlatform.ProtobufSchema with this project.
+There's also a NuGet package WavesPlatform.ProtobufSchema with this project.
 
 ## Rust
 Add dependency to your `Cargo.toml`
@@ -114,3 +114,7 @@ with grpc.insecure_channel('grpc.wavesnodes.com:6881') as channel:
     for block in BlockchainUpdatesApiStub(channel).Subscribe(SubscribeRequest(from_height=3135450, to_height=3135470)):
         print_update(block.update)
 ```
+
+# Dealing with recursion limits
+
+## Java
