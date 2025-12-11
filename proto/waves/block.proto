@@ -17,6 +17,7 @@ message Block {
             int64 reward_vote = 6;
             bytes state_hash = 7;
             bytes header_signature = 8;
+            FinalizationVoting finalization_voting = 9;
         }
 
         int32 chain_id = 1;
