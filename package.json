@@ -1,13 +1,13 @@
 {
   "name": "@waves/protobuf-serialization",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Generated types and methods for encoding and decoding protobuf messages as well as working with gRPC services.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "rm -rf dist && mkdir dist && npm run compileProtoc && npm run createTypeDeclarations && npm run compileProtoc -- --no-comments",
     "createTypeDeclarations": "pbts -o dist/index.d.ts --no-comments dist/index.js",
-    "compileProtoc": "pbjs -p proto -t static-module --force-long --no-create --no-verify --no-convert --no-delimited --no-beautify -w commonjs -o dist/index.js \"proto/waves/**/*.proto\""
+    "compileProtoc": "pbjs -t static-module --force-long --no-create --no-verify --no-convert --no-delimited --no-beautify -w commonjs -o dist/index.js \"proto/waves/**/*.proto\""
   },
   "files": [
     "dist",
@@ -23,11 +23,8 @@
     "url": "https://github.com/wavesplatform/protobuf-schemas/issues"
   },
   "homepage": "https://github.com/wavesplatform/protobuf-schemas#readme",
-  "devDependencies": {
-    "protobufjs-cli": "^2.0.0"
-  },
   "dependencies": {
     "@types/long": "^4.0.0",
-    "protobufjs": "7.5.4"
+    "protobufjs": "6.11.4"
   }
 }
