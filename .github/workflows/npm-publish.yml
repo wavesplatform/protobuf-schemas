@@ -1,0 +1,47 @@
+name: Publish NPM package
+on:
+  push:
+    tags: [ 'v[1-9].[0-9]+.[0-9]+' ]
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        description: Package version
+        required: true
+      npm_tag:
+        type: string
+        description: NPM Package tag
+        default: snapshot
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - id: prepare-versions
+        run: |
+          case "${{ github.event_name }}" in
+            push)              
+              echo "version=$(echo ${{ github.ref_name }} | sed 's/^v//')" >> $GITHUB_OUTPUT
+              echo "npm_tag=latest" >> $GITHUB_OUTPUT
+              ;;
+            workflow_dispatch)
+              echo "version=${{ inputs.version }}" >> $GITHUB_OUTPUT 
+              echo "npm_tag=${{ inputs.npm_tag }}" >> $GITHUB_OUTPUT
+              ;;
+            *) echo "Unknown event: ${{ github.event_name }}" && exit 1 ;;
+          esac
+    outputs:
+      version: ${{ steps.prepare-versions.outputs.version }}
+      npm_tag: ${{ steps.prepare-versions.outputs.npm_tag }}
+
+  publish:
+    needs: [ prepare ]
+    uses: wavesplatform/publish-to-npm/.github/workflows/publish.yml@d9094af15d98a7e176117c63d992ba64c3c1d506
+    with:
+      environment: NPMJS
+      event_name: release
+      version: ${{ needs.prepare.outputs.version }}
+      npm_tag: ${{ needs.prepare.outputs.npm_tag }}
+    permissions:
+      id-token: write
+      contents: read
