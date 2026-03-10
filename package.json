@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "prepublishOnly": "npm run build",
     "build": "rm -rf dist && mkdir dist && npm run compileProtoc && npm run createTypeDeclarations && npm run compileProtoc -- --no-comments",
     "createTypeDeclarations": "pbts -o dist/index.d.ts --no-comments dist/index.js",
     "compileProtoc": "pbjs -t static-module --force-long --no-create --no-verify --no-convert --no-delimited --no-beautify -w commonjs -o dist/index.js \"proto/waves/**/*.proto\""
@@ -26,5 +27,8 @@
   "dependencies": {
     "@types/long": "^4.0.0",
     "protobufjs": "6.11.4"
+  },
+  "overrides": {
+    "glob": "^12.0.0"
   }
 }
