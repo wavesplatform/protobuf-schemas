@@ -36,7 +36,7 @@ jobs:
 
   publish:
     needs: [ prepare ]
-    uses: wavesplatform/publish-to-npm/.github/workflows/publish.yml@d9094af15d98a7e176117c63d992ba64c3c1d506
+    uses: wavesplatform/publish-to-npm/.github/workflows/publish.yml@7d9462af686d83552d72097bf47a892e43d11f6e
     with:
       environment: NPMJS
       event_name: release
