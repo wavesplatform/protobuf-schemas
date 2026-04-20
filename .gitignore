@@ -25,4 +25,4 @@ Cargo.lock
 # Python
 .venv
 
-package.json
+package-lock.json
